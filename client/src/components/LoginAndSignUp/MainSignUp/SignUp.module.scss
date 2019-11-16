@@ -1,0 +1,43 @@
+
+.main {
+  position: relative;
+  z-index: 0;
+  background-color: #3ea9f5;
+}
+
+.mainContainer {
+  height: 100%;
+
+  background-color: #3ea9f5;
+  background-repeat: repeat;
+  background-size: 209px;
+  background-position: 50% -1%;
+}
+
+.mainContentContainer {
+  width: 100vw;
+  background-color: #3ea9f5;
+  max-width: 1430px;
+  min-height: 650px;
+  margin: 0 auto;
+
+  padding: 20px 0;
+}
+
+@media (min-width: 768px) {
+  .mainContentContainer {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .mainContentContainer {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .mainContentContainer {
+    width: 1170px;
+  }
+}

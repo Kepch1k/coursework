@@ -1,0 +1,158 @@
+.dashboardContent {
+  margin: 0 auto;
+  max-width: 1170px;
+}
+
+.RecommendationImg {
+  padding: 10px 25px;
+}
+
+.RecommendationImgInside {
+  width: 100%;
+}
+
+.Recommendation {
+  box-sizing: border-box;
+  float: left;
+  position: relative;
+  @media (min-width: 768px) {
+    width: 33.333333%;
+  }
+  @media (min-width: 992px) {
+    width: 25%;
+  }
+  width: 100%;
+}
+
+.RecommendationLink {
+  width: 100%;
+  height: 100%;
+}
+
+.RecommendationRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.helpfulArticles {
+  padding: 0 20px;
+}
+
+.contestInDraft {
+  width: 100%;
+}
+
+.contestInDraftContainer {
+  margin: 30px 60px 70px 20px;
+  background: #f9fafb;
+  @media (max-width: 992px) {
+    margin: 30px 20px 50px 20px;
+  }
+}
+
+.contestInDraftContainerInside {
+  padding: 30px 20px 40px 20px;
+  @media (min-width: 992px) {
+    padding: 30px 20px 10px 20px;
+  }
+}
+
+.contestInDraftContainerRow {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .button {
+    @media (min-width: 992px) {
+
+    }
+    max-height: 46px;
+    background-color: #28d2d0;
+    color: #fff;
+    display: block;
+    padding: 13px 0;
+    text-align: center;
+  }
+}
+
+.contestInDraftContainerSecondRow {
+
+}
+
+.contestInDraftContainerThirdRow {
+
+}
+
+.contestInDraftContainerColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 225px;
+
+  .sixthRow {
+    font-size: 26px;
+    padding: 25px 15px;
+
+    .trash {
+      cursor: pointer;
+    }
+  }
+
+  .fifthRow {
+    padding-top: 34px;
+    color: #465a89;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+  }
+}
+
+.contestInDraftContainerRowInsideColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .firstRow {
+    padding-bottom: 15px;
+    color: #556da5;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .secondRow {
+    padding-bottom: 20px;
+    color: #666;
+    font-size: 13px;
+    line-height: 18px;
+    word-break: break-all;
+  }
+
+  .thirdRow {
+    padding-bottom: 10px;
+    color: #666;
+    font-size: 13px;
+    line-height: 18px;
+    word-break: break-all;
+  }
+
+  .fourthRow {
+    color: #666;
+    font-size: 13px;
+    line-height: 18px;
+    word-break: break-all;
+  }
+
+}
+
+.buttonPosition {
+  position: absolute;
+  width: 100%;
+  top: 215px;
+  @media (min-width: 992px) {
+    position: static;
+    max-width: 272px;
+  }
+}
