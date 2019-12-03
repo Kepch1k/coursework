@@ -1,0 +1,74 @@
+.header {
+  //position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color:black;
+  //background: linear-gradient(to top, #ffffff, rgba(55, 182, 206, 0.70),#37B6CE);
+  //padding-bottom:20px;
+
+
+
+  .list{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .itemOfList{
+      line-height: 60px;
+      margin: 0 15px;
+      padding: 0 10px;
+      color: gray;
+
+    }
+
+    .itemOfList:hover{
+      background-color: #56ccc8;
+      color:white;
+      cursor: pointer;
+
+    }
+
+    .hamburger{
+
+      cursor: pointer;
+      display: flex;
+      width: 60px;
+      height: 60px;
+      background-color: #56ccc8;
+      color: #fff;
+      font-size: 22px;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+
+    }
+    .hamburger:hover{
+      background-color: rgba(57, 132, 141, 0.8);
+    }
+
+  }
+
+  .logo{
+    margin-left: 10px;
+    height:60px;
+    width:60px;
+    //background-size: cover;
+    //background-image: url("http://www.handandbeak.com/wp-content/uploads/pn/png-clip-art-vector-graphics-moon-image-lunar-eclipse.jpg");
+
+    i{
+      line-height: 60px;
+      font-size: 60px;
+      color: #56ccc8;
+      cursor: pointer;
+    }
+
+  }
+
+}

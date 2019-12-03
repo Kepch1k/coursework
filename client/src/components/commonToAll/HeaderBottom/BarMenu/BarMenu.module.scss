@@ -1,0 +1,51 @@
+.barMenuListItems {
+  padding: 10px 15px;
+
+  a {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: none;
+    text-decoration: none;
+  }
+
+}
+
+.mainHeaderBottomLists {
+  @media (min-width: 768px) {
+    display: none;
+  }
+  border-left: none;
+  border-right: none;
+  z-index: 20;
+  background: white;
+  position: absolute;
+  overflow: scroll;
+  transition: max-height 0.2s ease-out;
+  width: calc(100vw - (100vw - 100%));
+  box-sizing: border-box;
+}
+
+.barMenuSubList {
+  .SubBlock {
+    margin-top: 10px;
+  }
+
+  li {
+    background: rgba(210, 212, 211, 0.4);
+    margin-left: -15px;
+    padding: 3px 30px;
+    width: 100vw;
+
+    a {
+      color: rgba(160, 161, 163, 1);
+    }
+
+  }
+
+  li:hover {
+    a {
+      color: #575757;
+    }
+  }
+}

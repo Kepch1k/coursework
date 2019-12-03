@@ -1,0 +1,206 @@
+@import './basicStyle';
+
+$maxHeightForPC:600px;
+$maxHeightForTablet:500px;
+$maxHeightForPhone:400px;
+$chatAngleSize:10px;
+
+.chat{
+  border-bottom:1px solid gainsboro;
+  //border:0 solid transparent;
+  border-radius: $chatAngleSize;
+  position: -ms-device-fixed;
+  position: fixed;
+  //background: rgb(0, 136, 204);
+  background: #f5f5f5;
+  //padding: 24px 20px;
+  right:50px ;
+  bottom:50px;
+  -webkit-box-align: center;
+  align-items: center;
+  z-index: 100;
+  width:650px;
+  height:50vh;
+  box-sizing: border-box;
+  @include flexContainerWithThreeParameters(row,center,center);
+
+
+  @media all and (max-device-width:$maxWidthForPC) {
+    width: 500px;
+    height: 700px;
+    @media all and (min-device-height: $maxHeightForPC) {
+      height: 90vh;
+    }
+    @media all and (orientation: landscape) {
+      height: 100vh;
+    }
+  }
+  @media all and (max-device-width: $maxWidthForTablet) {
+    width: 450px;
+    height: 500px;
+    @media all and (min-device-height: $maxHeightForTablet) {
+      height: 90vh;
+    }
+    @media all and (orientation: landscape) {
+      height: 100vh;
+    }
+  }
+  @media all and (max-device-width: $maxWidthForPhone) {
+    width: 100vw;
+    height: 400px;
+    @media all and (min-device-height: $maxHeightForPhone) {
+      height: 90vh;
+    }
+    @media all and (orientation: landscape) {
+      height: 100vh;
+    }
+  }
+}
+
+.listOfChats{
+  width:30%;
+  height:100%;
+  overflow: hidden;
+  .header{
+    border-radius: $chatAngleSize 0 0 0;
+    border-right:1px solid lightgray;
+    border-bottom:1px solid transparent;
+    height: 10%;
+    @include flexContainerWithThreeParameters(row,center,center);
+    .search{
+      padding: 5px;
+      box-sizing: border-box;
+      width:85%;
+      height:100%;
+      input{
+        width:100%;
+        height:100%;
+        box-sizing: border-box;
+      }
+    }
+    .bars{
+      text-align: center;
+      width:15%;
+      cursor:pointer;
+    }
+  }
+
+  .content{
+    border-radius: 0 0 0  $chatAngleSize;
+    border-right:1px solid lightgray;
+    height: 90%;
+    overflow-y: scroll;
+    cursor:pointer;
+    background: #f5f5f5;
+    @include flexContainerWithThreeParameters(column,flex-start,center);
+    .itemInListOfChats{
+      width:100%;
+      height: 15%;
+      @include flexContainerWithThreeParameters(row,space-between,center);
+      .photo{
+        $photoSize:40px;
+        width: $photoSize;
+        height:$photoSize;
+        border-radius: $photoSize;
+        background-position: center;
+        background-size: cover;
+        margin-left: 2px;
+      }
+      .nameAndLastMessage{
+        @include flexContainerWithThreeParameters(column,center,flex-start);
+        padding: 0 2px;
+      }
+      .numberOfUnreadMessagesAndDateOfLatestMessage{
+        @include flexContainerWithThreeParameters(column,center,flex-end);
+        padding-right: 2px;
+        .numberOfUnreadMessages{
+          border-radius: 20px;
+          min-width: 20px;
+          padding: 2px;
+          text-align: center;
+          display: inline-block;
+          background-color: rgba(167, 177, 180, 0.69);
+        }
+      }
+    }
+
+    .itemInListOfChats:hover{
+      background: rgba(0,0,0,0.1);
+    }
+  }
+}
+
+.currentChat{
+  width:70%;
+  //border:1px solid black;
+  height:100%;
+  overflow: hidden;
+  .header{
+    border-radius: 0 $chatAngleSize 0 0;
+    border-bottom:1px solid lightgray;
+    height: 10%;
+    @include flexContainerWithThreeParameters(column,center,flex-start);
+    padding-left:10px;
+
+    .name{
+
+    }
+
+    .lastSeen{
+
+    }
+  }
+
+  .content{
+
+    border-radius: 0 0 $chatAngleSize 0;
+    border:0 solid lightgray;
+    height: 75%;
+   // height: 90%;
+    overflow-y: scroll;
+    padding: 5px;
+    background: #f5f5f5;
+    box-sizing: border-box;
+    @include flexContainerWithOneParameter(column);
+    .messageInChatHistory{
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      max-width: 100%;
+      margin-bottom: 5px;
+      .message{
+        white-space: pre-line;
+      }
+
+      .date{
+        float:right;
+      }
+    }
+  }
+
+  .placeForEnteringMessage{
+    height: 15%;
+    box-sizing: border-box;
+    border-top:1px solid lightgray;
+ //   border-bottom:1px solid gainsboro;
+  //  border-bottom:1px solid gainsboro;
+   @include flexContainerWithThreeParameters(row,center,center);
+
+    textarea{
+      width:100%;
+      height:100%;
+      box-sizing: border-box;
+      border: none;
+      padding: 5px;
+    }
+
+    i{
+      border-radius: 100%;
+      font-size:30px;
+      padding: 5px;
+      color:#419fd9;
+      cursor:pointer;
+    }
+  }
+
+}

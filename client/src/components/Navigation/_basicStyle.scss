@@ -1,0 +1,36 @@
+
+$maxWidthForPC:1200px;
+$maxWidthForTablet:900px;
+$maxWidthForPhone:600px;
+
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}
+
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}
+
+@mixin flexContainerWithOneParameter($direction) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+@mixin flexContainerWithTwoParameters($direction,$property2) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $property2;
+}
+
+@mixin flexContainerWithThreeParameters($direction,$property2,$property3) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $property2;
+  align-items: $property3;
+}
+
+.box { @include transform(rotate(30deg)); }

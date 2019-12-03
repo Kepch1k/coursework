@@ -1,0 +1,329 @@
+@import './basicStyle';
+
+$maxWidthForPC:1200px;
+$maxWidthForTablet:900px;
+$maxWidthForPhone:600px;
+
+//body{
+//  background: #1f253d;
+//}
+
+.navigation{
+
+  .controller{}
+
+  position: fixed;
+  left:0;
+  top:0;
+  height:100vh;
+  background: #1f253d;
+  display: flex;
+  //padding-top: 10%;
+
+  //padding-right: 30px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .login_register {
+
+    transition: all 0.3s linear;
+    overflow: hidden;
+
+  }
+
+  .forLocation{
+
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s linear;
+    overflow: hidden;
+
+    .accountProfile{
+      width: 300px;
+      border-radius: 5px;
+      background: #394264;
+      color:#FFFFFF;
+      margin-bottom: 20px;
+
+      .avatar{
+    //    margin: 25px 0 16px;
+        text-align: center;
+        height: 150px;
+        width:150px;
+        margin: 16px auto 0 auto;
+        border: 5px solid #50597b;
+        border-radius: 100%;
+        overflow: hidden;
+        background-position: center;
+        background-size: cover;
+      }
+
+      .info{
+
+        margin: 25px 0 16px;
+        text-align: center;
+        font-size: 24px;
+
+      }
+
+      .subInfo{
+
+        .preLine{
+
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+
+          .center{
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            box-sizing: border-box;
+          }
+
+          .likes{
+            background:#e64c65;
+            height:5px;
+            width: 33%;
+          }
+
+          .rating{
+            background:#11a8ab;
+            height:5px;
+            width: 33%;
+          }
+
+          .views{
+            background:#fcb150 ;
+            height:5px;
+            width: 33%;
+          }
+
+        }
+
+        .contain{
+
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+
+
+          .center{
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            box-sizing: border-box;
+          }
+
+          i{
+            color:#FFFFFF;
+            font-size: 16px;
+            margin:5px 0 0 0 ;
+            padding-right: 10px;
+          }
+
+          .field{
+            width: 33%;
+            text-align: center;
+            padding-bottom: 5px;
+          }
+
+
+
+        }
+
+        margin: 25px 0 0;
+        text-align: center;
+
+      }
+
+    }
+
+    .accountMenu{
+      // background: #1f253d;
+
+
+      color:#FFFFFF;
+
+      //margin-left:30px;
+      @include flexContainerWithThreeParameters(column,center,center);
+
+      .title{
+        height: 60px;
+        width: 300px;
+        text-align: center;
+        line-height: 60px;
+        background: #11a8ab;
+        color:#FFFFFF;
+        font-weight: 600;
+        font-size: 24px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        margin-bottom: 1px;
+      }
+
+      .itemOfList{
+        cursor: pointer;
+        height: 60px;
+        width: 300px;
+        background: #394264;
+        @include flexContainerWithThreeParameters(row,space-between,center);
+        margin-bottom: 1px;
+        transition: background 0.1s linear;
+
+        .numberOfNewSmth{
+          transition: background 0.1s linear;
+          color:#FFFFFF;
+          font-size: 17px;
+          margin-right:20px;
+          background: #50597b;
+          //min-width: 35px;
+          text-align: center;
+          padding: 0 15px;
+          box-sizing: border-box;
+          border-radius: 15px;
+        }
+
+        .contain{
+          margin-left:25px;
+        }
+      }
+
+      .itemOfList:hover{
+        background: #50597b;
+        .numberOfNewSmth{
+          background: #e64c65;
+        }
+      }
+
+      .lastElement{
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        margin-bottom: 0;
+      }
+
+    }
+
+  }
+
+  i{
+    color:#1f3c88;
+    margin:0 10px;
+    box-sizing: border-box;
+    font-size: 50px;
+    cursor: pointer;
+
+  }
+
+
+
+  .user{
+    width: 15vw;
+
+    .avatar{
+      border-radius:10vw;
+      margin: 10px auto;
+      width:10vw;
+      height:10vw;
+
+      @media (max-device-width: $maxWidthForPhone) {
+        width:150px;
+        height:150px;
+        border-radius:150px;
+      }
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border:2px solid #206876;
+    }
+
+    .name{
+      margin: 10px auto;
+      text-align: center;
+
+    }
+
+    .lvl{
+      border-radius:5vw;
+      //border:2px solid black;
+      margin: 10px auto;
+      box-sizing: border-box;
+      height: 3vh;
+      min-height: 10px;
+      overflow: hidden;
+      background: white;
+      //@media (max-device-width: $maxWidthForPhone) {
+      // // width:150px;
+      //  height:5vh;
+      //  min-height: 60px;
+      //  border-radius:150px;
+      //}
+
+
+      .progress{
+
+        height:100%;
+        transition: width 2s linear;
+        }
+    }
+
+    .lvlInfo{
+
+      position: relative;
+      top:-3vh;
+      text-align: center;
+      height:3vh;
+      line-height: 3vh;
+      //@media (max-device-width: $maxWidthForPhone) {
+      //  // width:150px;
+      //  height:5vh;
+      //  top:-5vh;
+      //  line-height: 5vh;
+      //  border-radius:150px;
+      //}
+
+    }
+  }
+
+  .listOfFeatures{
+    border-radius:5px;
+    padding: 5px;
+    border:1px solid black;
+    margin:5px 30px;
+
+      li{
+
+        border: 1px solid black;
+        padding:10px 30px;
+        cursor: pointer;
+        background: #206876	;
+        color:white;
+
+      }
+
+      li:hover{
+        background: #37B6CE	;
+      }
+  }
+
+  .support{
+    text-align: center;
+    padding: 10px 50px;
+    //margin-bottom: 20px;
+    margin: 0 auto 20px auto;
+    background: greenyellow;
+
+    cursor: pointer;
+    line-height: 4vh;
+  }
+}
+
+
+//rgba(158, 169, 255, 0.50)

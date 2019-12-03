@@ -1,0 +1,16 @@
+.displayBlockRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  padding: 40px 15px;
+  @media (min-width: 992px) {
+    flex-direction: row;
+  }
+}
+
+#icon {
+  min-height: 100px;
+  min-width: 100px;
+  color: red;
+}

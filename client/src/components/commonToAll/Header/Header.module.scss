@@ -1,0 +1,36 @@
+.mainHeader {
+  @media (min-width: 768px) {
+    display: inherit;
+  }
+  display: none;
+  height: 40px;
+
+  font-family: 'Raleway', sans-serif;
+  @font-face {
+    font-family: 'Raleway-medium'
+  }
+  @font-face {
+    font-family: 'sans-serif-medium'
+  }
+  margin-bottom: 13px;
+}
+
+.mainHeaderTop {
+  border-bottom: 1px solid #cacaca;
+  height: 40px;
+  margin-bottom: 13px;
+}
+
+.mainContainer {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+}
+
+.mainRow {
+  width: 100%;
+  margin-right: -15px;
+  margin-left: -15px;
+}

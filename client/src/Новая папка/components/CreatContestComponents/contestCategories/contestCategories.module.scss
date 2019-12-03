@@ -1,0 +1,55 @@
+.contestCategories {
+  background: #28d2d1;
+  padding: 25px 0 0 0;
+}
+
+.contestCategoriesHeading {
+  color: #fff;
+  text-align: center;
+  padding-bottom: 20px;
+
+  h3 {
+    font-size: 32px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+  }
+
+  p {
+    font-size: 17px;
+    margin: 0 0 10px;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+
+  hr {
+    width: 100px;
+    border: 1px solid #fff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 0;
+  }
+}
+
+.flexCategories {
+  margin: 0 auto;
+  max-width: 1200px;
+  @media (max-width: 768px) {
+    max-width: 100%;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    a {
+    }
+  }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: flex-start;
+}
