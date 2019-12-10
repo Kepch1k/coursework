@@ -30,10 +30,12 @@ let storage = multer.diskStorage({
 
 const upload = multer(storage);
 router.post('/user', userController.createUser);
+router.post('/login', verifyUser.verify, checkCountRefreshToken.check, userController.loginUser);
+
 router.get('/user', verifyAccessToken.check, userController.getUser);
 router.get('/getAllUsers', verifyAccessToken.check, userController.getAllUsers);
 router.post('/refresh', verifyRefreshToken.check, refreshTokenFindAndCount.check, userController.refreshUser);
-router.post('/login', verifyUser.verify, checkCountRefreshToken.check, userController.loginUser);
+
 router.post('/contest/:id', upload.any(), contestController.createContest);
 router.put('/contest/:id', upload.any(), contestController.updateContest);
 router.get('/contest/:id', verifyAccessToken.check, contestController.receiveContestById);

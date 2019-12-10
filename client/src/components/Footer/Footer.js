@@ -19,7 +19,7 @@ function Footer(props) {
                 </div>
             </div>
             <div className={`${style.copyright}`} >
-                © 2018 Copyright
+                © 2019 Copyright
             </div>
 
 

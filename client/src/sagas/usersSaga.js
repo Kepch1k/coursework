@@ -1,18 +1,19 @@
 import {put} from 'redux-saga/effects';
 import ACTION from '../actions/actiontsTypes';
-import {changePassword, checkEmail, createApiLink, getUserLogin, signUpLogin} from '../api/rest/restContoller';
+import {changePassword, checkEmail, createApiLink, userLogin, userSignUpLogin} from '../api/rest/restContoller';
 import {TOKENS_KEY} from '../constants/consts';
 import history from '../boot/browserHistory';
 
 const _ = require('lodash');
 
-export function* getLoginSaga({dataToSend}) {
+// login user
+export function* loginSaga({dataToSend}) {
     try {
-
+        console.log("new project :",dataToSend);
         const userData = dataToSend['dataToSend'];
 
         const rememberMeStatus = _.pick(userData, ["rememberMe"]);
-        const RES = yield getUserLogin(_.omit(userData, ["rememberMe"]));
+        const RES = yield userLogin(_.omit(userData, ["rememberMe"]));
         if (RES.data) {
             const USER = RES.data.user;
 
@@ -38,10 +39,12 @@ export function* getLoginSaga({dataToSend}) {
     }
 }
 
+// sign up user
 export function* signUpSaga({dataToSend}) {
+    console.log("new project :",dataToSend);
     const userData = dataToSend['dataToSend'];
     try {
-        const {data} = yield signUpLogin(userData);
+        const {data} = yield userSignUpLogin(userData);
         const USER = data.user;
         const TOKENS = data.tokenPair;
         const TOKENS_JSON = JSON.stringify(TOKENS);

@@ -1,6 +1,6 @@
 import {takeLatest} from 'redux-saga/effects';
 import ACTION from '../actions/actiontsTypes';
-import {changeUserPassword, checkUserEmail, getLoginSaga, signUpSaga} from './usersSaga';
+import {changeUserPassword, checkUserEmail, loginSaga, signUpSaga} from './usersSaga';
 import {isLoginSaga} from './isLoginSaga';
 import {getAllUsersSaga} from './getAllUsersSaga';
 import {changeBanStatusSaga} from './changeBanStatusSaga';
@@ -14,7 +14,7 @@ import {changeFilterTags, getById, getStarterContests, sendFilterData} from './A
 function* rootSaga() {
     yield takeLatest(ACTION.GET_ALL_USERS, getAllUsersSaga);
     yield takeLatest(ACTION.USER_SIGN_UP, signUpSaga);
-    yield takeLatest(ACTION.USER_LOGIN, getLoginSaga);
+    yield takeLatest(ACTION.USER_LOGIN, loginSaga);
     yield takeLatest(ACTION.USER_IS_LOGIN, isLoginSaga);
     yield takeLatest(ACTION.CHANGE_IS_BANED, changeBanStatusSaga);
     yield takeLatest(ACTION.IS_LOGOUT, logoutSaga);

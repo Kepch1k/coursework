@@ -8,51 +8,41 @@ const  isLogin = true;
 
 function Navigation(props) {
 
+    function siteFooter() {
+        const siteContent = document.getElementById('content');
+        const siteFooterHeight = document.getElementById('footer').offsetHeight;
+        siteContent.style.marginBottom=(siteFooterHeight)+"px";
+    }
+
+    const onResize = () => {
+
+        let sizeOfElement=isLogin?400:300;
+        const navigationWidth = document.getElementById("navigation").offsetWidth+15;
+        const mainPiece = document.getElementById("mainPiece");
+        const screenWidth = window.innerWidth;
+        mainPiece.style.width=(screenWidth-navigationWidth)+"px";
+        siteFooter();
+
+    };
+
     function resize() {
         let sizeOfElement=isLogin?400:300;
         const navigationWidth = document.getElementById("navigation").offsetWidth;
         const controllerWidth = document.getElementById("controller").offsetWidth;
-        console.log("navigationWidth",navigationWidth);
-        // const newNavigationWidth = (props.Nav.show)?(navigationWidth-(sizeOfElement+5)):navigationWidth+(sizeOfElement+35);
-        // const newNavigationWidth = (props.Nav.show)?(controllerWidth+15):navigationWidth+(sizeOfElement+35);
-        const newNavigationWidth = (props.Nav.show)?(controllerWidth+15):(navigationWidth+400+35);
-        console.log("newNavigationWidth",newNavigationWidth);
+        const newNavigationWidth = (props.Nav.show)?(controllerWidth+15):(navigationWidth+400-65);
         const mainPiece = document.getElementById("mainPiece");
         const screenWidth = window.innerWidth;
         mainPiece.style.width=(screenWidth-newNavigationWidth)+"px";
     }
 
-    function siteFooter() {
-        const siteContent = document.getElementById('content');
-
-        const siteFooterHeight = document.getElementById('footer').offsetHeight;
-
-        siteContent.style.marginBottom=(siteFooterHeight)+"px";
-    }
-
     window.onload=()=>{
-        let sizeOfElement=isLogin?400:300;
-        const navigationWidth = document.getElementById("navigation").offsetWidth+15;
-        //const newNavigationWidth = (props.Nav.show)?(navigationWidth-(sizeOfElement+5)):navigationWidth+(sizeOfElement+35);
-
-        const mainPiece = document.getElementById("mainPiece");
-        const screenWidth = window.innerWidth;
-        console.log(screenWidth-navigationWidth);
-        mainPiece.style.width=(screenWidth-navigationWidth)+"px";
-        siteFooter();
+        onResize();
     };
     window.onresize=()=>{
-        let sizeOfElement=isLogin?400:300;
-        const navigationWidth = document.getElementById("navigation").offsetWidth+15;
-        const mainPiece = document.getElementById("mainPiece");
-        const screenWidth = window.innerWidth;
-
-        mainPiece.style.width=(screenWidth-navigationWidth)+"px";
-        siteFooter();
+        onResize();
     };
 
-    useEffect(() => {
-        //resize();
+    /*useEffect(() => {
         const drawingCanvas = document.getElementById('body');
         if(drawingCanvas && drawingCanvas.getContext) {
             const context = drawingCanvas.getContext('2d');
@@ -62,11 +52,11 @@ function Navigation(props) {
 
             }
         }
-    });
+    });*/
 
 
     const [user, setUser] = useState({
-        nickName:"James True",
+        nickName:"Anne Hathaway",
         lvl:{
             currentLvl:10,
             currentXP:0,
@@ -170,7 +160,7 @@ function Navigation(props) {
                 <div className={`${style.accountProfile}`} >
                     <div className={`${style.avatar}`} style={{backgroundImage:"url(https://upload.wikimedia.org/wikipedia/commons/e/e1/Anne_Hathaway_Face.jpg)"}}/>
                     <div className={`${style.info}`}>
-                        Anne Hathaway
+                        {user.nickName}
                     </div>
                     <div className={`${style.subInfo}`}>
                         <div className={`${style.preLine}`}>
