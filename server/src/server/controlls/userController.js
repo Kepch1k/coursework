@@ -7,9 +7,9 @@ const {
         } = require('../utils/Consts');
 const tokenController = require('./tokenController');
 
-
 module.exports.createUser = async (req, res, next) => {
     const user = req.body;
+    console.log(user);
     try {
         const password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8));
         const DataToCreate = Object.assign({}, user, {password: password});
@@ -27,20 +27,12 @@ module.exports.createUser = async (req, res, next) => {
     }
 };
 
-module.exports.refreshUser = async (req, res, next) => {
-    const id = req.id;
-    try {
-        const tokenPair = await tokenController.createTokenPair(id);
-        res.send({tokenPair});
-    } catch (e) {
-        next({status: 401, message: 'Your session ended. Please re login.'});
-    }
-};
-
 module.exports.loginUser = async (req, res, next) => {
+    console.log("req.body",req.body);
     try {
         const id = req.user.id;
         const user = req.user;
+
         const tokenPair = await tokenController.createTokenPair(id);
         const userForSend = _.omit(user, OTHER_FIELDS);
         res.send({user: userForSend, tokenPair: tokenPair});
@@ -57,71 +49,16 @@ module.exports.getUser = async (req, res, next) => {
         const userForSend = _.omit(user, OTHER_FIELDS);
         res.send(userForSend);
     } catch (e) {
-        next({status: 404, message: 'User not found'});
+        next({status: 404, message: 'Footer not found'});
     }
 };
 
-module.exports.hasEmail = async (req, res, next) => {
-    const payload = req.body;
+module.exports.refreshUser = async (req, res, next) => {
+    const id = req.id;
     try {
-        const result = await User.find({where: payload});
-        if (result) {
-            res.send({result: 'has Email'});
-        } else {
-            res.send({result: 'hasn\'t Email'});
-        }
+        const tokenPair = await tokenController.createTokenPair(id);
+        res.send({tokenPair});
     } catch (e) {
-        console.log(e)
+        next({status: 401, message: 'Your session ended. Please re login.'});
     }
 };
-
-module.exports.getAllUsers = async (req, res, next) => {
-    try {
-        const result = await User.findAll({
-            order: [
-                ['id', 'ASC'],
-            ]
-        });
-        const dataToReceive=result.map((item)=>{
-            return _.omit(item.dataValues,NO_NEEDED_FIELD_FOR_ADMIN_PANEL)
-        });
-        res.send(dataToReceive);
-    } catch (e) {
-        next({status: 404, message: 'Users not found'});
-    }
-};
-
-module.exports.updateUserBanStatus = async (req, res, next) => {
-
-    const result = await User.update(
-        {isBaned: req.body.banStatus},
-        {returning: true, where: {id: req.params.id}}
-    );
-    const [, [newResult]] = result;
-    res.send(newResult.dataValues);
-};
-
-module.exports.changeUserPassword = async (req, res, next) => {
-    const password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8));
-    const result = await User.update(
-        {password: password},
-        {returning: true, where: {email: req.body.email}}
-    );
-    const [, [newResult]] = result;
-    if (newResult) {
-        res.send({linkToRedirect: "/", msg: "Password has been changed", err: false})
-    } else {
-        res.send({linkToRedirect: "/", msg: "Error something went wrong", err: true})
-    }
-};
-
-module.exports.logout = async (req, res, next) => {
-    await RefreshToken.destroy({
-        returning: true,
-        where: {
-            tokenString: req.body.data.token
-        }
-    });
-    res.send("OK");
-};
-

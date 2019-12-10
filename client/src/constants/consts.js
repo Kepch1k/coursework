@@ -1,5 +1,6 @@
 const USER_KEY = "USER";
 const TOKENS_KEY = "TOKENS";
+const ACCESS_TOKEN = "accessToken";
 const FILTER_TAGS = {
     originalName: {Industries: 'typeOfIndustry', Categories: 'typeOfContest'},
     label: ['Industries', 'Categories',],
@@ -71,5 +72,6 @@ module.exports =
         CONTEST_HEADER,
         FILTER_TAGS,
         NO_NEEDED_FIELDS,
-        FIELDS_NAME_HUMANIZE
+        FIELDS_NAME_HUMANIZE,
+        ACCESS_TOKEN
     };

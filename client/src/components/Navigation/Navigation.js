@@ -2,11 +2,13 @@ import React,{useState,useEffect} from 'react';
 import style from './Navigation.module.scss';
 import connect from 'react-redux/es/connect/connect';
 import {showingOrHidingNavigation} from "../../actions/actionCreator";
-import Login from '../../components/Login/Login';
+import LoginOrRegister from '../Login/LoginOrRegister';
 
 const  isLogin = true;
 
 function Navigation(props) {
+
+    const  isLogin = !props.user;
 
     function siteFooter() {
         const siteContent = document.getElementById('content');
@@ -29,7 +31,8 @@ function Navigation(props) {
         let sizeOfElement=isLogin?400:300;
         const navigationWidth = document.getElementById("navigation").offsetWidth;
         const controllerWidth = document.getElementById("controller").offsetWidth;
-        const newNavigationWidth = (props.Nav.show)?(controllerWidth+15):(navigationWidth+400-65);
+        //const newNavigationWidth = (props.Nav.show)?(controllerWidth+15):(navigationWidth+400-65);  //normal
+        const newNavigationWidth = (props.Nav.show)?(controllerWidth+15):(navigationWidth+400+35);          //login
         const mainPiece = document.getElementById("mainPiece");
         const screenWidth = window.innerWidth;
         mainPiece.style.width=(screenWidth-newNavigationWidth)+"px";
@@ -197,7 +200,7 @@ function Navigation(props) {
             </div>
                 :
             <div className={`${style.login_register}`} style={{width:(props.Nav.show)?"400px":"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
-                <Login/>
+                <LoginOrRegister/>
             </div>}
 
 
@@ -216,6 +219,7 @@ function Navigation(props) {
 const mapStateToProps = (state) => {
     return {
         Nav:state.UI_Elements.Nav,
+        user: state.userReducers.user,
     };
 };
 

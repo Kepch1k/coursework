@@ -22,39 +22,11 @@ export default function (state = initialState, action) {
                 updated: false,
             };
         }
-        case ACTION.LOGIN_SUCCESS: {
+        case ACTION.NO_USER: {
             return {
                 ...state,
-                data: action.data,
                 isFetching: false,
-                banned: false,
-                error: null,
-                loginFailed: false,
-            };
-        }
-        case ACTION.LOGIN_BANNED: {
-            return {
-                ...state,
-                banned: true,
-                isFetching: false,
-                loginFailed: false,
-            };
-        }
-        case ACTION.USER_ERROR: {
-            return {
-                ...state,
-                banned: false,
-                error: action.error,
-                isFetching: false,
-                loginFailed: true,
-            };
-        }
-        case ACTION.USER_LOGOUT: {
-            return {
-                ...state,
-                banned: false,
-                user: action.userToRead,
-                loginFailed: false,
+                loginFailed: false
             };
         }
         case ACTION.SET_USER: {
@@ -66,12 +38,6 @@ export default function (state = initialState, action) {
                 isFetching: false,
             };
         }
-        case ACTION.CHECK_USER_EMAIL: {
-            return {
-                ...state,
-                isFetching: false,
-            };
-        }
         case ACTION.GET_USER: {
             return {
                 ...state,
@@ -79,13 +45,16 @@ export default function (state = initialState, action) {
                 loginFailed: false
             };
         }
-        case ACTION.NO_USER: {
+        case ACTION.IS_LOGIN_ERROR: {
             return {
                 ...state,
+                banned: false,
+                error: action.error,
                 isFetching: false,
-                loginFailed: false
+                loginFailed: true,
             };
         }
+
         default: {
             return state;
         }

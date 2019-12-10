@@ -25,6 +25,7 @@ axios.interceptors.response.use(
                     history.push('/login');
                     break;
                 case 403:
+                    console.log("error 403");
                     const token = (sessionStorage.getItem(TOKENS_KEY)) ? sessionStorage.getItem(TOKENS_KEY) : localStorage.getItem(TOKENS_KEY);
                     const {data: {tokenPair: tokens}} = await axios.post(`${restURL}/refresh`, {refresh: (JSON.parse(token)).refresh});
                     const TOKENS_JSON = JSON.stringify(tokens);

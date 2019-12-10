@@ -17,14 +17,18 @@ a{color:inherit;text-decoration:none}
   position:relative;
   background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
   box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+
 }
 .login-html{
   width:100%;
   height:100%;
+  overflow-y: scroll;
   position:absolute;
-  padding:90px 70px 50px 70px;
+  display: inline-block;
+  padding:20px 70px 20px 70px;
   background:rgba(40,57,101,.9);
 }
+
 .login-html .sign-in-htm,
 .login-html .sign-up-htm{
   top:0;
@@ -147,4 +151,29 @@ a{color:inherit;text-decoration:none}
 }
 .foot-lnk{
   text-align:center;
+}
+.error{
+  padding-top:5px;
+  color:red;
+}
+
+.scroll::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  background-color: #F5F5F5;
+}
+
+.scroll::-webkit-scrollbar
+{
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+.scroll::-webkit-scrollbar-thumb
+{
+  background-color: #0ae;
+
+  background-image: -webkit-gradient(linear, 0 0, 0 100%,
+          color-stop(.5, rgba(255, 255, 255, .2)),
+          color-stop(.5, transparent), to(transparent));
 }

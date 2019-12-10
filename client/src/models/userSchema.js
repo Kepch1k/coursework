@@ -10,14 +10,11 @@ const schema = yup.object().shape({
         .matches(/[a-z]/, 'at least one lowercase char')
         .matches(/[A-Z]/, 'at least one uppercase char')
         .matches(/[a-zA-Z]+[^a-zA-Z\s]+/, 'at least 1 number or special char (@,!,#, etc).'),
-    firstName: yup.string()
-        .min(8, "Must be longer than 8 characters")
-        .required("Required"),
-    lastName: yup.string()
-        .min(8, "Must be longer than 8 characters")
+    userName: yup.string()
+        .min(10, "Must be longer than 10 characters")
         .required("Required"),
     displayName: yup.string()
-        .min(10, "Must be longer than 10 characters")
+        .min(8, "Must be longer than 8 characters")
         .required("Required"),
 
 });

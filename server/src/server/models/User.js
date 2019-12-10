@@ -8,14 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             type: DataTypes.INTEGER,
         },
-        firstName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notEmpty: true,
-            },
-        },
-        lastName: {
+        username: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -47,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         role: {
             type: DataTypes.STRING,
             allowNull: false,
+            defaultValue:"USER",
         },
     });
     User.associate = function (models) {

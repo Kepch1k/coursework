@@ -24,14 +24,7 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            firstName: {
-                type: Sequelize.STRING,
-                allowNull: false,
-                validate: {
-                    notEmpty: true,
-                },
-            },
-            lastName: {
+            username: {
                 type: Sequelize.STRING,
                 allowNull: false,
                 validate: {

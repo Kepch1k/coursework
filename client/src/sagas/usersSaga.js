@@ -1,7 +1,7 @@
 import {put} from 'redux-saga/effects';
 import ACTION from '../actions/actiontsTypes';
-import {changePassword, checkEmail, createApiLink, userLogin, userSignUpLogin} from '../api/rest/restContoller';
-import {TOKENS_KEY} from '../constants/consts';
+import {changePassword, checkEmail, userIsLogin, userLogin, userSignUpLogin} from '../api/rest/restContoller';
+import {ACCESS_TOKEN,TOKENS_KEY} from '../constants/consts';
 import history from '../boot/browserHistory';
 
 const _ = require('lodash');
@@ -9,7 +9,7 @@ const _ = require('lodash');
 // login user
 export function* loginSaga({dataToSend}) {
     try {
-        console.log("new project :",dataToSend);
+        console.log("new project login:",dataToSend);
         const userData = dataToSend['dataToSend'];
 
         const rememberMeStatus = _.pick(userData, ["rememberMe"]);
@@ -18,8 +18,11 @@ export function* loginSaga({dataToSend}) {
             const USER = RES.data.user;
 
             const TOKENS = RES.data.tokenPair;
+            console.log(TOKENS);
             yield put({type: ACTION.SET_USER, user: USER});
             const TOKENS_JSON = JSON.stringify(TOKENS);
+            console.log( localStorage.getItem(TOKENS));
+
             if (rememberMeStatus) {
                 localStorage.setItem(TOKENS_KEY, TOKENS_JSON);
             } else {
@@ -41,27 +44,26 @@ export function* loginSaga({dataToSend}) {
 
 // sign up user
 export function* signUpSaga({dataToSend}) {
-    console.log("new project :",dataToSend);
+    console.log("new project register:",dataToSend);
     const userData = dataToSend['dataToSend'];
     try {
-        const {data} = yield userSignUpLogin(userData);
-        const USER = data.user;
-        const TOKENS = data.tokenPair;
-        const TOKENS_JSON = JSON.stringify(TOKENS);
-        sessionStorage.setItem(TOKENS_KEY, TOKENS_JSON);
-        yield put({type: ACTION.SET_USER, user: USER});
-        const dataToSendOnApi = {
-            title: "Confirm email",
-            email: USER.email,
-            longTitle: "To confirm mail, follow the link"
-        };
-        const dataCreateApiLink = yield createApiLink(dataToSendOnApi);
-        yield put({
-            type: ACTION.GET_MAIL_SERVICE_RESULT,
-            result: `For email address confirmation ${dataCreateApiLink.data}`,
-            err: false
-        });
+        const RES = yield userSignUpLogin(userData);
+        if (RES.data) {
+            const USER = RES.data.user;
 
+            const TOKENS = RES.data.tokenPair;
+            console.log(TOKENS);
+            yield put({type: ACTION.SET_USER, user: USER});
+            const TOKENS_JSON = JSON.stringify(TOKENS);
+            localStorage.setItem(TOKENS_KEY, TOKENS_JSON);
+            console.log( localStorage.getItem(TOKENS));
+
+            if (dataToSend['pageToRedirect']) {
+                history.push(dataToSend['pageToRedirect']);
+            } else {
+                history.push('/');
+            }
+        }
         if (dataToSend['pageToRedirect']) {
             history.push(dataToSend['pageToRedirect']);
         } else {
@@ -70,48 +72,20 @@ export function* signUpSaga({dataToSend}) {
 
         history.push('/');
     } catch (e) {
-        yield put({type: ACTION.USER_ERROR, error: e});
+      //  yield put({type: ACTION.USER_ERROR, error: e});
     }
 }
 
-export function* checkUserEmail({dataToSend}) {
+export function* isLoginSaga() {
+    console.log("ssssssss");
     try {
-        const {email} = dataToSend;
-        const {data} = yield checkEmail({email: email});
-        if (dataToSend.title === 'Let\'s Get Started') {
-            const toRedirect = history.location.pathname;
-            yield put({type: ACTION.SITE_NAVIGATION, data: {pageToRedirect: toRedirect}});
-            if (data.result === "has Email") {
-                history.push('/login');
-            } else {
-                history.push('/signup');
-            }
-        } else {
-            if (data.result === "has Email") {
-                yield put({type: ACTION.MODAL_STATE, data: {confirmEmail: false}});
-                const {data} = yield createApiLink(dataToSend);
-                yield put({
-                    type: ACTION.GET_MAIL_SERVICE_RESULT,
-                    result: data,
-                    err: false,
-                    otherData: {resetPasswordView: false}
-                });
-
-            } else {
-                yield put({type: ACTION.GET_MAIL_SERVICE_RESULT, result: "Email not registered", err: true});
-            }
+        const token = (sessionStorage.getItem(TOKENS_KEY)) ? sessionStorage.getItem(TOKENS_KEY) : localStorage.getItem(TOKENS_KEY);
+        if (token) {
+            yield put({type: ACTION.GET_USER});
+            const {data} = yield userIsLogin();
+            yield put({type: ACTION.SET_USER, user: data});
         }
     } catch (e) {
-        yield put({type: ACTION.USER_ERROR, error: e});
-    }
-}
-
-export function* changeUserPassword({dataToSend}) {
-    try {
-        const {data} = yield changePassword(dataToSend);
-        yield put({type: ACTION.MODAL_STATE, data: {resetPassword: false}});
-        yield put({type: ACTION.GET_MAIL_SERVICE_RESULT, result: data.msg, err: data.err});
-    } catch (e) {
-
+        yield put({type: ACTION.IS_LOGIN_ERROR, error: e});
     }
 }
