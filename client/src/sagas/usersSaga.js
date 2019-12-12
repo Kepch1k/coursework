@@ -33,9 +33,9 @@ export function* loginSaga({dataToSend}) {
             } else {
                 history.push('/');
             }
-        } else if (RES.response.data === "Footer is baned") {
+        } else if (RES.response.data === "Tag is baned") {
             yield put({type: ACTION.LOGIN_BANNED});
-        } else if (RES.response.data === "Footer not founds") {
+        } else if (RES.response.data === "Tag not founds") {
             yield put({type: ACTION.USER_ERROR, error: RES.response});
         }
     } catch (e) {
@@ -84,6 +84,10 @@ export function* isLoginSaga() {
             yield put({type: ACTION.GET_USER});
             const {data} = yield userIsLogin();
             yield put({type: ACTION.SET_USER, user: data});
+            // yield put({type: ACTION.WRITE_HTML_PARAMETERS_FOR_ANIMATION,   dataForAnimation:{
+            //         navigation:document.getElementById("navigation").offsetWidth,
+            //         controller:document.getElementById("controller").offsetWidth,
+            //     }});
         }
     } catch (e) {
         yield put({type: ACTION.IS_LOGIN_ERROR, error: e});

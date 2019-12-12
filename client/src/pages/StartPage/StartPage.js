@@ -3,6 +3,7 @@ import style from './StartPage.module.scss';
 import Header from '../../components/Header/Header'
 import connect from 'react-redux/es/connect/connect';
 import Footer from '../../components/Footer/Footer';
+import MainBody from '../../components/MainBody/MainBody';
 import Navigation from '../../components/Navigation/Navigation';
 
 function StartPage(props) {
@@ -14,7 +15,7 @@ function StartPage(props) {
             <div id={"mainPiece"} className={`${style.mainPiece}`}>
                 <Header/>
                 <div id={"content"} className={`${style.content}`}>
-                    Main body
+                   <MainBody/>
                 </div>
                 <Footer/>
             </div>

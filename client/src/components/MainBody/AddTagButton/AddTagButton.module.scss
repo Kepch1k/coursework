@@ -1,0 +1,25 @@
+.addButton{
+  padding: 5px;
+  border-radius: 5px;
+  margin:5px;
+  border: 2px solid #4CAF50;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.addInput{
+  padding: 5px;
+  height: 36px;
+  width: 120px;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  line-height: 20px;
+}
+.errorMsg{
+  color:red;
+  font-size:14px;
+  height: 31px;
+  padding: 2px;
+  line-height: 31px;
+}

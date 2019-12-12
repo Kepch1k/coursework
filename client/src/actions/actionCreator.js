@@ -28,4 +28,16 @@ export const showingOrHidingNavigation = ({show}) => {
     })
 };
 
+export const writeHtml = (data) => {
+    return ({
+        type: ACTION.WRITE_HTML_PARAMETERS_FOR_ANIMATION,
+        dataForAnimation:data,
+    })
+};
 
+export const changeCurrentTags = (data) => {
+    return ({
+        type: ACTION.CHANGE_CURRENT_TAGS,
+        listOfTags:data,
+    })
+};

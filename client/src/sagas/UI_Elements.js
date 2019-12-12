@@ -29,9 +29,9 @@ export function* getLoginSaga({dataToSend}) {
             } else {
                 history.push('/');
             }
-        } else if (RES.response.data === "Footer is baned") {
+        } else if (RES.response.data === "Tag is baned") {
             yield put({type: ACTION.LOGIN_BANNED});
-        } else if (RES.response.data === "Footer not founds") {
+        } else if (RES.response.data === "Tag not founds") {
             yield put({type: ACTION.USER_ERROR, error: RES.response});
         }
     } catch (e) {

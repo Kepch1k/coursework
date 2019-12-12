@@ -49,7 +49,7 @@ module.exports.getUser = async (req, res, next) => {
         const userForSend = _.omit(user, OTHER_FIELDS);
         res.send(userForSend);
     } catch (e) {
-        next({status: 404, message: 'Footer not found'});
+        next({status: 404, message: 'Tag not found'});
     }
 };
 

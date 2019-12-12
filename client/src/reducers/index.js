@@ -4,12 +4,14 @@ import userReducers from './userReducers';
 import modalReducers from './modalReducers';
 import UI_Elements from './UI_Elements';
 import formInitialValues from './formInitialValues';
+import Note from './Note';
 
 const appReducer = combineReducers({
     userReducers,
     modalReducers,
     UI_Elements,
     formInitialValues,
+    Note,
     form: formReducer,
 });
 

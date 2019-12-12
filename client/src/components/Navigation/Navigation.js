@@ -1,41 +1,104 @@
 import React,{useState,useEffect} from 'react';
 import style from './Navigation.module.scss';
 import connect from 'react-redux/es/connect/connect';
-import {showingOrHidingNavigation} from "../../actions/actionCreator";
+import {showingOrHidingNavigation,writeHtml} from "../../actions/actionCreator";
 import LoginOrRegister from '../Login/LoginOrRegister';
-
-const  isLogin = true;
 
 function Navigation(props) {
 
-    const  isLogin = !props.user;
+     const [isLogin, setIsLogin] = useState(
+        props.user
+     );
+     //
+     //
+     // console.log("isLogin",isLogin!=props.user,isLogin,props.user);
+     // if(isLogin!=props.user){
+     //     setIsLogin( props.user);
+     //
+     //     props.writeHtml({
+     //         navigation:document.getElementById("navigation").offsetWidth,
+     //         controller:document.getElementById("controller").offsetWidth,
+     //     });
+     //
+     // }
 
-    function siteFooter() {
-        const siteContent = document.getElementById('content');
-        const siteFooterHeight = document.getElementById('footer').offsetHeight;
-        siteContent.style.marginBottom=(siteFooterHeight)+"px";
-    }
+    //console.log(props.user);
+    //
+    // useEffect(() => {
+    //     const id = setInterval(() => {
+    // const htmlParam = {
+    //     navigation:document.getElementById("navigation").offsetWidth,
+    //     controller:document.getElementById("controller").offsetWidth,
+    // };
+    // console.log(props.Nav.parameters!=htmlParam,props.Nav.parameters,htmlParam);
+    //             if(props.Nav.parameters.navigation!=htmlParam.navigation){
+    //                 onResize();
+    //             }
+    //     }, 500);
+    //     const id2 = setTimeout(()=>{
+    //         clearTimeout(id)
+    //     },1500);
+    //     return () => clearTimeout(id2);
+    // });
 
-    const onResize = () => {
 
-        let sizeOfElement=isLogin?400:300;
+    // useEffect(() => {
+    //         const id = setTimeout(() => {
+    //                     onResize();
+    //
+    //         }, 100);
+    //         return () => clearTimeout(id);
+    //     });
+
+   // console.log((!!props.Nav.parameters) && (isLogin!==props.user));
+
+
+    // if((!!props.Nav.parameters) && (isLogin!==props.user)){
+    //    // setTimeout(()=>{
+    //         setIsLogin( props.user);
+    //         console.log("setIsLogin");
+    //         onResize();
+    //   //  },1000);
+    // }
+
+
+    document.ready=()=>{
+        props.writeHtml({
+            navigation:document.getElementById("navigation").offsetWidth,
+            controller:document.getElementById("controller").offsetWidth,
+        });
+    };
+
+    function onResize() {
+        props.writeHtml({
+            navigation:document.getElementById("navigation").offsetWidth,
+            controller:document.getElementById("controller").offsetWidth,
+        });
+        console.log({
+            navigation:document.getElementById("navigation").offsetWidth,
+            controller:document.getElementById("controller").offsetWidth,
+        });
         const navigationWidth = document.getElementById("navigation").offsetWidth+15;
         const mainPiece = document.getElementById("mainPiece");
         const screenWidth = window.innerWidth;
         mainPiece.style.width=(screenWidth-navigationWidth)+"px";
         siteFooter();
 
-    };
+    }
 
     function resize() {
-        let sizeOfElement=isLogin?400:300;
-        const navigationWidth = document.getElementById("navigation").offsetWidth;
-        const controllerWidth = document.getElementById("controller").offsetWidth;
-        //const newNavigationWidth = (props.Nav.show)?(controllerWidth+15):(navigationWidth+400-65);  //normal
-        const newNavigationWidth = (props.Nav.show)?(controllerWidth+15):(navigationWidth+400+35);          //login
+        const navigationWidth = props.Nav.parameters.navigation;
+        const controllerWidth = props.Nav.parameters.controller;
+        const newNavigationWidth = (props.Nav.show)?(controllerWidth+15):(navigationWidth+15);
         const mainPiece = document.getElementById("mainPiece");
         const screenWidth = window.innerWidth;
         mainPiece.style.width=(screenWidth-newNavigationWidth)+"px";
+    }
+
+    function siteFooter() {
+        const siteContent = document.getElementById('content');
+        const siteFooterHeight = document.getElementById('footer').offsetHeight;
+        siteContent.style.marginBottom=(siteFooterHeight)+"px";
     }
 
     window.onload=()=>{
@@ -44,19 +107,6 @@ function Navigation(props) {
     window.onresize=()=>{
         onResize();
     };
-
-    /*useEffect(() => {
-        const drawingCanvas = document.getElementById('body');
-        if(drawingCanvas && drawingCanvas.getContext) {
-            const context = drawingCanvas.getContext('2d');
-
-
-            return function clean() {
-
-            }
-        }
-    });*/
-
 
     const [user, setUser] = useState({
         nickName:"Anne Hathaway",
@@ -98,12 +148,14 @@ function Navigation(props) {
         },
     ]);
 
-    const [colorOfProgress, setColorOfProgress] = useState("#00b400");
-    const [showNavigation, setShowNavigation] = useState(true);
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const sizeOfLvlBar= Math.round((screenWidth/8));
-    let currentLvlSize = Math.round(((user.lvl.currentXP/user.lvl.neededXP)*sizeOfLvlBar));
+    // const [colorOfProgress, setColorOfProgress] = useState("#00b400");
+    // const [showNavigation, setShowNavigation] = useState(true);
+    // const screenWidth = window.innerWidth;
+    // const screenHeight = window.innerHeight;
+    // const sizeOfLvlBar= Math.round((screenWidth/8));
+    // let currentLvlSize = Math.round(((user.lvl.currentXP/user.lvl.neededXP)*sizeOfLvlBar));
+
+
     const accountMenuToRender = accountMenu.map((el,index,array)=>{
         const lastElement=((index + 1) === array.length)?style.lastElement:"";
        return <div className={`${style.itemOfList} ${lastElement}`} key={index}>
@@ -115,8 +167,6 @@ function Navigation(props) {
            </div>:<></>}
        </div>
     });
-
-
 
     return (
     /*(
@@ -156,10 +206,13 @@ function Navigation(props) {
         </nav>
         );*/
 
+//  {(!!props.user)?<div className={`${style.forLocation}`} style={{width:(props.Nav.show)?"300px":"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
 
+// {(!!props.user)?<div className={`${style.forLocation}`}
+//                      style={{width:(props.Nav.show)?`${((props.Nav.parameters.navigation-props.Nav.parameters.controller)-((props.Nav.show)?20:0))}px`:"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
         <nav className={`${style.navigation}`} id={"navigation"}>
 
-            {(!isLogin)?<div className={`${style.forLocation}`} style={{width:(props.Nav.show)?"300px":"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
+            {(!!props.user)?<div className={`${style.forLocation}`} style={{width:(props.Nav.show)?"300px":"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
                 <div className={`${style.accountProfile}`} >
                     <div className={`${style.avatar}`} style={{backgroundImage:"url(https://upload.wikimedia.org/wikipedia/commons/e/e1/Anne_Hathaway_Face.jpg)"}}/>
                     <div className={`${style.info}`}>
@@ -199,7 +252,7 @@ function Navigation(props) {
 
             </div>
                 :
-            <div className={`${style.login_register}`} style={{width:(props.Nav.show)?"400px":"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
+                <div className={`${style.login_register}`} style={{width:(props.Nav.show)?"400px":"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
                 <LoginOrRegister/>
             </div>}
 
@@ -209,13 +262,14 @@ function Navigation(props) {
                 props.showingOrHidingNavigation({show:!props.Nav.show});
             }}>
                 {(props.Nav.show)?<i className="fas fa-angle-double-left"/>:<i className="fas fa-angle-double-right"/>}</div>
-
         </nav>
-
-    )
-
+    );
 }
-//props.showingOrHidingNavigation({show:!props.Nav.show})
+
+//<div className={`${style.login_register}`} style={{width:(props.Nav.show)?`${((props.Nav.parameters.navigation-props.Nav.parameters.controller)-((props.Nav.show)?20:0))}px`:"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
+
+// <div className={`${style.login_register}`} style={{width:(props.Nav.show)?"400px":"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
+
 const mapStateToProps = (state) => {
     return {
         Nav:state.UI_Elements.Nav,
@@ -225,8 +279,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     showingOrHidingNavigation: (data) => dispatch(showingOrHidingNavigation(data)),
+    writeHtml: (data) => dispatch(writeHtml(data)),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(Navigation);
-
-//export default Navigation;

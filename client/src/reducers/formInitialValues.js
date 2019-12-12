@@ -1,4 +1,4 @@
-import ACTION from '../actions/actiontsTypes';
+//import ACTION from '../actions/actiontsTypes';
 
 const initialState = {
     "login/reg":{

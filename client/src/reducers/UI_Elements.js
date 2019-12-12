@@ -3,6 +3,7 @@ import ACTION from '../actions/actiontsTypes';
 const initialState = {
     Nav:{
         show:true,
+        parameters:null,
     },
 };
 
@@ -19,6 +20,39 @@ export default function (state = initialState, action) {
                 }
             };
         }
+
+        case ACTION.WRITE_HTML_PARAMETERS_FOR_ANIMATION: {
+            return {
+                ...state,
+                Nav: {
+                    ...state.Nav,
+                    parameters:{
+                        ...action.dataForAnimation,
+                    }
+                }
+            };
+        }
+
+        // case ACTION.SET_USER: {
+        //
+        //     console.log({
+        //         navigation:document.getElementById("navigation").offsetWidth,
+        //         controller:document.getElementById("controller").offsetWidth,
+        //     });
+        //
+        //     return {
+        //         ...state,
+        //         Nav: {
+        //             ...state.Nav,
+        //             parameters:{
+        //                    navigation:document.getElementById("navigation").offsetWidth,
+        //                    controller:document.getElementById("controller").offsetWidth,
+        //             }
+        //         }
+        //     };
+        // }
+
+
         default: {
             return state;
         }

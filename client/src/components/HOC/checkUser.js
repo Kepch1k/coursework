@@ -3,7 +3,7 @@ import connect from "react-redux/es/connect/connect";
 import {TOKENS_KEY} from '../../constants/consts';
 import {
     noUser,
-    userIsLogin
+    userIsLogin,
 } from '../../actions/actionCreator';
 
 class UserLoader extends Component {
