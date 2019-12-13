@@ -4,6 +4,7 @@ import multer from 'multer';
 
 const router = express.Router();
 const userController = require('../controlls/userController');
+const notesController = require('../controlls/notesController');
 
 const verifyUser = require('../middleWare/verifyUser');
 const checkCountRefreshToken = require('../middleWare/checkCountRefreshToken');
@@ -21,9 +22,16 @@ let storage = multer.diskStorage({
 });
 
 const upload = multer(storage);
+//user
 router.post('/user', userController.createUser);
 router.post('/login',verifyUser.verify, checkCountRefreshToken.check, userController.loginUser);
 router.get('/user', verifyAccessToken.check, userController.getUser);
+//token
 router.post('/refresh', verifyRefreshToken.check, refreshTokenFindAndCount.check, userController.refreshUser);
+//note
+router.post('/note', verifyUser.verify, notesController.createNote);
+router.put('/note', verifyUser.verify, notesController.updateNote);
+router.delete('/note', verifyUser.verify, notesController.deleteNote);
+router.get('/note', verifyAccessToken.check, notesController.getNote);
 
 module.exports = router;

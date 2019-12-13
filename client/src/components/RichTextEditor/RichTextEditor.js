@@ -1,9 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 import style from './RichTextEditor.module.scss';
 import { Editor, EditorState, Modifier, RichUtils, convertFromRaw, convertToRaw } from 'draft-js';
+import connect from 'react-redux/es/connect/connect';
 import "draft-js/dist/Draft.css";
 import BlockStyleControls from './BlockStyleControls/BlockStyleControls';
 import InlineStyleControls from './InlineStyleControls/InlineStyleControls';
+import {setCurrentNote} from "../../actions/actionCreator";
 
 const styleMap = {
     CODE: {
@@ -18,17 +20,24 @@ function RichTextEditor(props) {
 
     let RichTextEditorRef = null;
 
-    const [editorState, setEditorState] = React.useState(
+    const [editorState, setEditorState] = useState(
         EditorState.createEmpty()
     );
 
-    // the raw state, stringified
-    const rawDraftContentState = JSON.stringify( convertToRaw(editorState.getCurrentContent()) );
+    // const noteOnChange = () => {
+    //     const rawDraftContentState = JSON.stringify( convertToRaw(editorState.getCurrentContent()) );
+    //     props.setCurrentNote(rawDraftContentState);
+    // };
 
+    // the raw state, stringified
+
+
+    //const contentState2 = convertFromRaw( JSON.parse( rawDraftContentState) );
+   // this.props.setCurrentNote(rawDraftContentState);
    // console.log(rawDraftContentState);
 
 // convert the raw state back to a useable ContentState object
-    const contentState2 = convertFromRaw( JSON.parse( rawDraftContentState) );
+
 
    // console.log(contentState2);
 
@@ -58,29 +67,6 @@ function RichTextEditor(props) {
     }
 
     function _toggleBlockType(blockType) {
-
-        var selection = editorState.getSelection();
-        var startKey = selection.getStartKey();
-        var endKey = selection.getEndKey();
-        var content = editorState.getCurrentContent();
-        var target = selection; // Triple-click can lead to a selection that includes offset 0 of the
-        // following block. The `SelectionState` for this case is accurate, but
-        // we should avoid toggling block type for the trailing block because it
-        // is a confusing interaction.
-
-        if (startKey !== endKey && selection.getEndOffset() === 0) {
-            var blockBefore = content.getBlockBefore(endKey);
-            endKey = blockBefore.getKey();
-            target = target.merge({
-                anchorKey: startKey,
-                anchorOffset: selection.getStartOffset(),
-                focusKey: endKey,
-                focusOffset: blockBefore.getLength(),
-                isBackward: false
-            });
-        }
-
-      console.log(target);
         setEditorState(
             RichUtils.toggleBlockType(
                 editorState,
@@ -131,7 +117,10 @@ function RichTextEditor(props) {
                     customStyleMap={styleMap}
                     editorState={editorState}
                     handleKeyCommand={handleKeyCommand}
-                    onChange={setEditorState}
+                    onChange={(e)=>{setEditorState(e);
+                        const rawDraftContentState = JSON.stringify( convertToRaw(editorState.getCurrentContent()) );
+                        props.setCurrentNote(rawDraftContentState);
+                    }}
                     onTab={onTab}
                     placeholder="write here"
                     ref={(input) => { RichTextEditorRef = input; }}
@@ -141,10 +130,21 @@ function RichTextEditor(props) {
         </div>
         );
 }
-
-
-//-----------------------------------------
-
+//onChange={setEditorState}
 
 //-----------------------------------------
-export default RichTextEditor;
+
+const mapStateToProps = (state) => {
+    return {
+        note:state.Note,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    setCurrentNote: (data) => dispatch(setCurrentNote(data)),
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(RichTextEditor);
+
+//-----------------------------------------
+//export default RichTextEditor;

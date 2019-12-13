@@ -1,9 +1,16 @@
 import React,{useState} from 'react';
 import style from './AddTagButton.module.scss';
 import connect from 'react-redux/es/connect/connect';
-import {changeCurrentTags} from "../../../actions/actionCreator";
+import {changeCurrentTags, addCommonNotification, addSpecialNotification} from "../../../actions/actionCreator";
 
+class Message {
+    constructor(text="false warning",timer=5000,type="warn") {
+            this.text=text;
+            this.timer=timer;
+            this.type=type;
+    }
 
+}
 
 function AddTagButton(props) {
 
@@ -16,18 +23,13 @@ function AddTagButton(props) {
             }
         }
         if(value.length > maxChars){
-            setAddTagState({
-                ...addTagState,
-                error:"Too much chars. Use less than 50 chars",
-            });
+            props.addCommonNotification(new Message("Too much chars. Use less than 50 chars"));
         }
         return counter > 0 && value.length < maxChars;
     };
 
     const [addTagState, setAddTagState] = useState({
         button:true,
-        errorVerify:null,
-        errorToAdd:null,
     });
 
     const [inputState, setInputState] = useState(null);
@@ -40,21 +42,11 @@ function AddTagButton(props) {
                         if(props.note.tags.length<10){
                             setAddTagState({...addTagState,button: !addTagState.button});
                         }else{
-                            setAddTagState({
-                                ...addTagState,
-                                errorToAdd:"Already 10 tags. No more.",
-                            });
-                            setTimeout(()=>{
-                                setAddTagState({
-                                    ...addTagState,
-                                    errorToAdd:null,
-                                });
-                            },3000);
+                            props.addCommonNotification(new Message("Already 10 tags. No more."));
                         }
                     }}>
                         {" Добавить Тэг "}
                     </button>
-                    {addTagState.errorToAdd && <span className={`${style.errorMsg}`}>{ addTagState.errorToAdd }</span>}
                     </>
                         :
                     <>
@@ -62,12 +54,10 @@ function AddTagButton(props) {
                             className={`${style.addInput}`}
                             onChange={(event)=>setInputState(event.target.value)}
                         />
-                        {addTagState.errorVerify && <span className={`${style.errorMsg}`}>{ addTagState.errorVerify }</span>}
                         <button
                             className={`${style.addButton}`}
                             onClick={()=>{
                             setAddTagState({...addTagState,button: !addTagState.button});
-                            console.log(inputState);
                             if(inputState) {
                                 if(checkValue(inputState)) {
                                 props.changeCurrentTags([...props.note.tags, inputState]);
@@ -82,7 +72,6 @@ function AddTagButton(props) {
                                 setAddTagState({
                                     ...addTagState,
                                     button: !addTagState.button,
-                                    errorVerify:null,
                                 });
 
                             }}>
@@ -102,6 +91,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     changeCurrentTags: (data) => dispatch(changeCurrentTags(data)),
+    addCommonNotification: (data) => dispatch(addCommonNotification(data)),
+    addSpecialNotification: (data) => dispatch(addSpecialNotification(data)),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(AddTagButton);

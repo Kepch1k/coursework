@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import style from './ListOfTags.module.scss';
-import Tag from '../Tag/Tag';
+import Tag from './Tag/Tag';
 import connect from 'react-redux/es/connect/connect';
 import {changeCurrentTags} from "../../actions/actionCreator";
 

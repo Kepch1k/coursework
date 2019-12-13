@@ -11,11 +11,9 @@ const initialState = {
        "first",
        "second",
        "first",
-       "second",
-       "first",
-       "second",
-       "third"
    ],
+    currentNote:null,
+    title:"Test Name",
 
 };
 
@@ -27,6 +25,20 @@ export default function (state = initialState, action) {
                 tags:[
                     ...action.listOfTags
                 ],
+            };
+        }
+
+        case ACTION.SET_CURRENT_NOTE_TEXT: {
+            return {
+                ...state,
+                currentNote:action.note,
+            };
+        }
+
+        case ACTION.SET_NOTE: {
+            console.log(action);
+            return {
+                ...state,
             };
         }
 

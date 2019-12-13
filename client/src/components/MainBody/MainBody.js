@@ -3,6 +3,8 @@ import style from './MainBody.module.scss';
 import RichTextEditor from '../RichTextEditor/RichTextEditor';
 import ListOfTags from '../ListOfTags/ListOfTags';
 import AddTagButton from './AddTagButton/AddTagButton';
+import ManagePanel from '../ManagePanel/ManagePanel';
+
 
 function MainBody(props) {
     return (
@@ -15,7 +17,7 @@ function MainBody(props) {
                 <RichTextEditor/>
             </div>
             <div className={`${style.managePanel}`}>
-
+                <ManagePanel/>
             </div>
         </div>);
 }

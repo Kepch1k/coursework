@@ -5,6 +5,7 @@ import modalReducers from './modalReducers';
 import UI_Elements from './UI_Elements';
 import formInitialValues from './formInitialValues';
 import Note from './Note';
+import Notification from './Notification';
 
 const appReducer = combineReducers({
     userReducers,
@@ -12,6 +13,7 @@ const appReducer = combineReducers({
     UI_Elements,
     formInitialValues,
     Note,
+    Notification,
     form: formReducer,
 });
 

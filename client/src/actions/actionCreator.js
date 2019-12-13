@@ -41,3 +41,60 @@ export const changeCurrentTags = (data) => {
         listOfTags:data,
     })
 };
+
+export const addCommonNotification = (data) => {
+    return ({
+        type: ACTION.ADD_COMMON_NOTIFICATION,
+        message:data,
+    })
+};
+
+export const deleteCommonNotification = (data) => {
+    return ({
+        type: ACTION.DELETE_COMMON_NOTIFICATION,
+        message:data,
+    })
+};
+
+export const addSpecialNotification = (data) => {
+    return ({
+        type: ACTION.ADD_SPECIAL_NOTIFICATION,
+        message:data,
+    })
+};
+
+export const deleteSpecialNotification = (data) => {
+    return ({
+        type: ACTION.DELETE_SPECIAL_NOTIFICATION,
+        message:data,
+    })
+};
+
+export const setCurrentNote = (data) => {
+    return ({
+        type: ACTION.SET_CURRENT_NOTE_TEXT,
+        note:data,
+    })
+};
+
+export const saveNote = (data) => {
+    return ({
+        type: ACTION.SAVE_NOTE,
+        note:data,
+    })
+};
+
+export const updateNote = (data) => {
+    return ({
+        type: ACTION.UPDATE_NOTE,
+        note:data,
+    })
+};
+
+export const deleteNote = (data) => {
+    return ({
+        type: ACTION.DELETE_NOTE,
+        note:data,
+    })
+};
+
