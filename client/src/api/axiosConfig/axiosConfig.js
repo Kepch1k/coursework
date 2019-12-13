@@ -3,6 +3,8 @@ import {TOKENS_KEY} from '../../constants/consts';
 import {restURL} from '../baseURL';
 import history from '../../boot/browserHistory';
 
+let counter=0;
+
 axios.interceptors.request.use(config => {
     if (localStorage.getItem(TOKENS_KEY)) {
         config.headers.common['Authorization'] = "Bearer " + (JSON.parse(localStorage.getItem(TOKENS_KEY))).access
@@ -25,18 +27,26 @@ axios.interceptors.response.use(
                     history.push('/login');
                     break;
                 case 403:
-                   // console.log("error 403");
-                    const token = (sessionStorage.getItem(TOKENS_KEY)) ? sessionStorage.getItem(TOKENS_KEY) : localStorage.getItem(TOKENS_KEY);
-                    const {data: {tokenPair: tokens}} = await axios.post(`${restURL}/refresh`, {refresh: (JSON.parse(token)).refresh});
-                    const TOKENS_JSON = JSON.stringify(tokens);
-                    if (sessionStorage.getItem(TOKENS_KEY)) {
-                        sessionStorage.setItem(TOKENS_KEY, TOKENS_JSON);
-                        error.config.headers['Authorization'] = "Bearer " + (JSON.parse(sessionStorage.getItem(TOKENS_KEY))).access;
-                    } else {
-                        localStorage.setItem(TOKENS_KEY, TOKENS_JSON);
-                        error.config.headers['Authorization'] = "Bearer " + (JSON.parse(localStorage.getItem(TOKENS_KEY))).access;
+                    if(counter<5){
+
+                        const token = (sessionStorage.getItem(TOKENS_KEY)) ? sessionStorage.getItem(TOKENS_KEY) : localStorage.getItem(TOKENS_KEY);
+                        const {data: {tokenPair: tokens}} = await axios.post(`${restURL}/refresh`, {refresh: (JSON.parse(token)).refresh});
+                        const TOKENS_JSON = JSON.stringify(tokens);
+                        if (sessionStorage.getItem(TOKENS_KEY)) {
+                            sessionStorage.setItem(TOKENS_KEY, TOKENS_JSON);
+                            error.config.headers['Authorization'] = "Bearer " + (JSON.parse(sessionStorage.getItem(TOKENS_KEY))).access;
+                        } else {
+                            localStorage.setItem(TOKENS_KEY, TOKENS_JSON);
+                            error.config.headers['Authorization'] = "Bearer " + (JSON.parse(localStorage.getItem(TOKENS_KEY))).access;
+                        }
+                        counter++;
+                        return axios.request(error.config);
+
+
                     }
-                    return axios.request(error.config);
+                   // console.log("error 403");
+
+
                 default:
                     break
             }

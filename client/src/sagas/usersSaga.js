@@ -44,7 +44,7 @@ export function* loginSaga({dataToSend}) {
 
 // sign up user
 export function* signUpSaga({dataToSend}) {
-    console.log("new project register:",dataToSend);
+   // console.log("new project register:",dataToSend);
     const userData = dataToSend['dataToSend'];
     try {
         const RES = yield userSignUpLogin(userData);

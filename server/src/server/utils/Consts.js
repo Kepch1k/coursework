@@ -18,7 +18,11 @@ const CHANGE = "change";
 const WATCH = "watch";
 const ENTRIES = "entries";
 const CONTESTS = "contests";
-
+const FIELD_FOR_CREATE_NOTE_TO_REPLACE = {
+    tags:"tags",
+    currentNote:"contain",
+    title:"titleOfNote",
+};
 
 module.exports = {
     SECRETS_ACCESS,
@@ -40,5 +44,6 @@ module.exports = {
     CONTESTS,
     FILTER_TAGS,
     FILTER_TAGS_IN_NEED_CHANGED,
-    NO_NEEDED_FIELD_FOR_ADMIN_PANEL
+    NO_NEEDED_FIELD_FOR_ADMIN_PANEL,
+    FIELD_FOR_CREATE_NOTE_TO_REPLACE
 };

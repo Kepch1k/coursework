@@ -9,6 +9,11 @@ import ManagePanel from '../ManagePanel/ManagePanel';
 function MainBody(props) {
     return (
         <div className={`${style.mainBody}`}>
+            <div className={`${style.title_wrapper}`}>
+                <div className={`${style.title}`}>
+                    TITLE
+                </div>
+            </div>
             <div className={`${style.tags}`}>
                 <ListOfTags/>
                 <AddTagButton/>

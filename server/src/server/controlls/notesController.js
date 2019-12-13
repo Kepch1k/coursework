@@ -4,10 +4,10 @@ const uniqid = require('uniqid');
 const {sequelize} = require('../models');
 
 module.exports.createNote = async (req, res, next) => {
-    const payload = req.body;
-    console.log(req.user);
+    const {preparedData} = req;
+console.log("req.preparedData",req.preparedData);
     try {
-        const createdNote = await Note.create(payload);
+        const createdNote = await Note.create(preparedData);
         res.send({
             note: createdNote.dataValues
         });

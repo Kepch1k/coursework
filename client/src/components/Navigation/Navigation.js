@@ -78,7 +78,7 @@ function Navigation(props) {
             navigation:document.getElementById("navigation").offsetWidth,
             controller:document.getElementById("controller").offsetWidth,
         });
-        const navigationWidth = document.getElementById("navigation").offsetWidth+15;
+        const navigationWidth = document.getElementById("navigation").offsetWidth;//+15;
         const mainPiece = document.getElementById("mainPiece");
         const screenWidth = window.innerWidth;
         mainPiece.style.width=(screenWidth-navigationWidth)+"px";

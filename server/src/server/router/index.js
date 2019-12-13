@@ -11,6 +11,8 @@ const checkCountRefreshToken = require('../middleWare/checkCountRefreshToken');
 const verifyAccessToken = require('../middleWare/verifyAccessToken');
 const verifyRefreshToken = require('../middleWare/verifyRefreshToken');
 const refreshTokenFindAndCount = require('../middleWare/refreshTokenFindAndCount');
+const preparingDataForCreateNote = require('../middleWare/preparingDataForCreateNote');
+
 
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -29,9 +31,9 @@ router.get('/user', verifyAccessToken.check, userController.getUser);
 //token
 router.post('/refresh', verifyRefreshToken.check, refreshTokenFindAndCount.check, userController.refreshUser);
 //note
-router.post('/note', verifyUser.verify, notesController.createNote);
-router.put('/note', verifyUser.verify, notesController.updateNote);
-router.delete('/note', verifyUser.verify, notesController.deleteNote);
+router.post('/note', verifyAccessToken.check, preparingDataForCreateNote.prepare, notesController.createNote);
+router.put('/note', verifyAccessToken.check, notesController.updateNote);
+router.delete('/note', verifyAccessToken.check, notesController.deleteNote);
 router.get('/note', verifyAccessToken.check, notesController.getNote);
 
 module.exports = router;
