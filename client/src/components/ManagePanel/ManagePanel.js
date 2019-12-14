@@ -9,17 +9,17 @@ function ManagePanel(props) {
         <div className={`${style.managePanel}`}>
             <div className={`${style.button_wrapper}`}>
                 <div className={`${style.btn} ${style.third}`} onClick={()=>{props.saveNote(props.note)}}>
-                   Save
+                   Сохранить
                 </div>
             </div>
             <div className={`${style.button_wrapper}`}>
                 <div className={`${style.btn} ${style.fifth}`} onClick={()=>{props.updateNote(props.note)}}>
-                   Update
+                   Обновить
                 </div>
             </div>
             <div className={`${style.button_wrapper}`}>
                 <div className={`${style.btn} ${style.fourth}`} onClick={()=>{props.deleteNote(props.note)}}>
-                   Delete
+                   Удалить
                 </div>
             </div>
         </div>);

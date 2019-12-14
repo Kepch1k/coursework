@@ -9,10 +9,11 @@
 }
 .addInput{
   padding: 5px;
-  height: 36px;
-  width: 120px;
+  height: 32px;
+  min-width: 100px;
   margin-left: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
   line-height: 20px;
+  max-width: 150px;
 }

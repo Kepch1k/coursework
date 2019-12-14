@@ -77,17 +77,12 @@ export function* signUpSaga({dataToSend}) {
 }
 
 export function* isLoginSaga() {
-    console.log("ssssssss");
     try {
         const token = (sessionStorage.getItem(TOKENS_KEY)) ? sessionStorage.getItem(TOKENS_KEY) : localStorage.getItem(TOKENS_KEY);
         if (token) {
             yield put({type: ACTION.GET_USER});
             const {data} = yield userIsLogin();
             yield put({type: ACTION.SET_USER, user: data});
-            // yield put({type: ACTION.WRITE_HTML_PARAMETERS_FOR_ANIMATION,   dataForAnimation:{
-            //         navigation:document.getElementById("navigation").offsetWidth,
-            //         controller:document.getElementById("controller").offsetWidth,
-            //     }});
         }
     } catch (e) {
         yield put({type: ACTION.IS_LOGIN_ERROR, error: e});

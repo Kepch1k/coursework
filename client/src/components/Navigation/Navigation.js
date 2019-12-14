@@ -6,60 +6,21 @@ import LoginOrRegister from '../Login/LoginOrRegister';
 
 function Navigation(props) {
 
+    function deepEqual (obj1, obj2){
+        return JSON.stringify(obj1)===JSON.stringify(obj2);
+    }
+
      const [isLogin, setIsLogin] = useState(
         props.user
      );
-     //
-     //
-     // console.log("isLogin",isLogin!=props.user,isLogin,props.user);
-     // if(isLogin!=props.user){
-     //     setIsLogin( props.user);
-     //
-     //     props.writeHtml({
-     //         navigation:document.getElementById("navigation").offsetWidth,
-     //         controller:document.getElementById("controller").offsetWidth,
-     //     });
-     //
-     // }
 
-    //console.log(props.user);
-    //
-    // useEffect(() => {
-    //     const id = setInterval(() => {
-    // const htmlParam = {
-    //     navigation:document.getElementById("navigation").offsetWidth,
-    //     controller:document.getElementById("controller").offsetWidth,
-    // };
-    // console.log(props.Nav.parameters!=htmlParam,props.Nav.parameters,htmlParam);
-    //             if(props.Nav.parameters.navigation!=htmlParam.navigation){
-    //                 onResize();
-    //             }
-    //     }, 500);
-    //     const id2 = setTimeout(()=>{
-    //         clearTimeout(id)
-    //     },1500);
-    //     return () => clearTimeout(id2);
-    // });
-
-
-    // useEffect(() => {
-    //         const id = setTimeout(() => {
-    //                     onResize();
-    //
-    //         }, 100);
-    //         return () => clearTimeout(id);
-    //     });
-
-   // console.log((!!props.Nav.parameters) && (isLogin!==props.user));
-
-
-    // if((!!props.Nav.parameters) && (isLogin!==props.user)){
-    //    // setTimeout(()=>{
-    //         setIsLogin( props.user);
-    //         console.log("setIsLogin");
-    //         onResize();
-    //   //  },1000);
-    // }
+     if(!deepEqual(isLogin,props.user)){
+         setIsLogin(props.user);
+         const id = setInterval(()=>{
+             onResize();
+         },100);
+       setTimeout(()=>{clearInterval(id)},5000);
+     }
 
 
     document.ready=()=>{
@@ -67,44 +28,91 @@ function Navigation(props) {
             navigation:document.getElementById("navigation").offsetWidth,
             controller:document.getElementById("controller").offsetWidth,
         });
+        const mainPiece = document.getElementById("mainPiece");
+        mainPiece.style.width=mainPiece.offsetWidth+"px";
     };
 
     function onResize() {
+        if(document.getElementById("navigation")&&document.getElementById("controller")){
+            if(
+                (props.Nav.parameters)
+            ) {
+                    props.writeHtml({
+                        navigation: document.getElementById("navigation").offsetWidth,
+                        controller: document.getElementById("controller").offsetWidth,
+                    });
+                    const mainPiece = document.getElementById("mainPiece");
+                    const mainPieceHeight = mainPiece.offsetHeight;
+                    const screenHeight = window.innerHeight;
+                    //const addedWidth = (screenHeight < mainPieceHeight) ? 15 : 0;
+                    const navigationWidth = document.getElementById("navigation").offsetWidth;//+15;
+                    const screenWidth = window.innerWidth;
+                    mainPiece.style.width = (screenWidth - navigationWidth) + "px";
+                    siteFooter();
+            }
+        }
+    }
+
+    function resize() {
+
+        if(document.getElementById("navigation")&&document.getElementById("controller")){
+            if(
+                (props.Nav.parameters)
+            ) {
+                    console.log(props.Nav.parameters.navigation,document.getElementById("navigation").offsetWidth);
+                    props.writeHtml({
+                        navigation:document.getElementById("navigation").offsetWidth,
+                        controller:document.getElementById("controller").offsetWidth,
+                    });
+                    const navigationWidth = props.Nav.parameters.navigation;
+                    const controllerWidth = props.Nav.parameters.controller;
+                    const mainPiece = document.getElementById("mainPiece");
+                    const mainPieceHeight=mainPiece.offsetHeight;
+                    const screenHeight = window.innerHeight;
+                  //  const addedWidth = (screenHeight<mainPieceHeight)?15:0;
+                    const newNavigationWidth = (props.Nav.show)?(controllerWidth):(navigationWidth);
+                    const screenWidth = window.innerWidth;
+                    mainPiece.style.width=(screenWidth-newNavigationWidth)+"px";
+                    siteFooter();
+            }
+        }
+
+    }
+
+    function siteFooter() {
+
+        if(document.getElementById('content') && document.getElementById('footer')){
+            const siteContent = document.getElementById('content');
+            const siteFooterHeight = document.getElementById('footer').offsetHeight;
+            siteContent.style.marginBottom=(siteFooterHeight)+"px";
+
+        }
+
+    }
+
+    window.onload=()=>{
         props.writeHtml({
             navigation:document.getElementById("navigation").offsetWidth,
             controller:document.getElementById("controller").offsetWidth,
         });
-        console.log({
-            navigation:document.getElementById("navigation").offsetWidth,
-            controller:document.getElementById("controller").offsetWidth,
+        // const mainPiece = document.getElementById("mainPiece");
+        // mainPiece.style.width=mainPiece.offsetWidth+"px";
+        props.writeHtml({
+            navigation: document.getElementById("navigation").offsetWidth,
+            controller: document.getElementById("controller").offsetWidth,
         });
+        const mainPiece = document.getElementById("mainPiece");
+        const mainPieceHeight = mainPiece.offsetHeight;
+        const screenHeight = window.innerHeight;
+        //const addedWidth = (screenHeight < mainPieceHeight) ? 15 : 0;
         const navigationWidth = document.getElementById("navigation").offsetWidth;//+15;
-        const mainPiece = document.getElementById("mainPiece");
         const screenWidth = window.innerWidth;
-        mainPiece.style.width=(screenWidth-navigationWidth)+"px";
+        mainPiece.style.width = (screenWidth - navigationWidth) + "px";
         siteFooter();
-
-    }
-
-    function resize() {
-        const navigationWidth = props.Nav.parameters.navigation;
-        const controllerWidth = props.Nav.parameters.controller;
-        const newNavigationWidth = (props.Nav.show)?(controllerWidth+15):(navigationWidth+15);
-        const mainPiece = document.getElementById("mainPiece");
-        const screenWidth = window.innerWidth;
-        mainPiece.style.width=(screenWidth-newNavigationWidth)+"px";
-    }
-
-    function siteFooter() {
-        const siteContent = document.getElementById('content');
-        const siteFooterHeight = document.getElementById('footer').offsetHeight;
-        siteContent.style.marginBottom=(siteFooterHeight)+"px";
-    }
-
-    window.onload=()=>{
-        onResize();
     };
+
     window.onresize=()=>{
+        console.log("awdawd");
         onResize();
     };
 
@@ -167,7 +175,6 @@ function Navigation(props) {
            </div>:<></>}
        </div>
     });
-
     return (
     /*(
         <nav className={`${style.navigation}`}>
@@ -211,8 +218,7 @@ function Navigation(props) {
 // {(!!props.user)?<div className={`${style.forLocation}`}
 //                      style={{width:(props.Nav.show)?`${((props.Nav.parameters.navigation-props.Nav.parameters.controller)-((props.Nav.show)?20:0))}px`:"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
         <nav className={`${style.navigation}`} id={"navigation"}>
-
-            {(!!props.user)?<div className={`${style.forLocation}`} style={{width:(props.Nav.show)?"300px":"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
+            {(!!props.user)?<div className={`${style.forLocation}`} style={{width:(props.Nav.show)?"300px":"0px",marginLeft:(props.Nav.show)?"20px":"0px"}} id={"forLocation"}>
                 <div className={`${style.accountProfile}`} >
                     <div className={`${style.avatar}`} style={{backgroundImage:"url(https://upload.wikimedia.org/wikipedia/commons/e/e1/Anne_Hathaway_Face.jpg)"}}/>
                     <div className={`${style.info}`}>
@@ -260,15 +266,13 @@ function Navigation(props) {
             <div className={style.controller} id={"controller"}  onClick={()=>{
                 resize();
                 props.showingOrHidingNavigation({show:!props.Nav.show});
+
             }}>
                 {(props.Nav.show)?<i className="fas fa-angle-double-left"/>:<i className="fas fa-angle-double-right"/>}</div>
         </nav>
     );
 }
 
-//<div className={`${style.login_register}`} style={{width:(props.Nav.show)?`${((props.Nav.parameters.navigation-props.Nav.parameters.controller)-((props.Nav.show)?20:0))}px`:"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
-
-// <div className={`${style.login_register}`} style={{width:(props.Nav.show)?"400px":"0",marginLeft:(props.Nav.show)?"20px":"0"}}>
 
 const mapStateToProps = (state) => {
     return {

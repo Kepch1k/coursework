@@ -57,12 +57,12 @@ console.log(props.user);
             <div className={style.loginMain}>
                 <div className={`${style["login-wrap"]}`}>
                     <div className={`${style["login-html"]} ${style["scroll"]}`} >
-                        <Field id="tab-1" name="tab" component={renderField} checked={(props.tab)?props.tab:props.initialValues.tab} type="radio" props={{ value: "login" }} className={`${style["sign-in"]}`}/><label htmlFor="tab-1" className=  {`${style["tab"]}`}>Sign In</label>
-                        <Field id="tab-2" name="tab" component={renderField} checked={(props.tab)?props.tab:props.initialValues.tab} type="radio" props={{ value: "register" }} className={`${style["sign-up"]}`}/><label htmlFor="tab-2" className=  {`${style["tab"]}`}>Sign Up</label>
+                        <Field id="tab-1" name="tab" component={renderField} checked={(props.tab)?props.tab:props.initialValues.tab} type="radio" props={{ value: "login" }} className={`${style["sign-in"]}`}/><label htmlFor="tab-1" className=  {`${style["tab"]}`}>Вход</label>
+                        <Field id="tab-2" name="tab" component={renderField} checked={(props.tab)?props.tab:props.initialValues.tab} type="radio" props={{ value: "register" }} className={`${style["sign-up"]}`}/><label htmlFor="tab-2" className=  {`${style["tab"]}`}>Регистрация</label>
                             <div className=  {`${style["login-form"]}`}>
                             <div className=  {`${style["sign-in-htm"]}`}>
                                 <div className=  {`${style["group"]}`}>
-                                    <label htmlFor="pass" className=  {`${style["label"]}`}>Email Address</label>
+                                    <label htmlFor="pass" className=  {`${style["label"]}`}>Почта</label>
                                     <Field
                                         id="login/email"
                                         name="login/email"
@@ -72,7 +72,7 @@ console.log(props.user);
                                     />
                                 </div>
                                 <div className=  {`${style["group"]}`}>
-                                    <label htmlFor="pass" className="label">Password</label>
+                                    <label htmlFor="pass" className="label">Пароль</label>
                                     <Field
                                         id="login/password"
                                         name="login/password"
@@ -84,21 +84,21 @@ console.log(props.user);
                                 </div>
                                 <div className=  {`${style["group"]}`}>
                                     <Field id="check" name="keepMe" component="input" type="checkbox" className={`${style["check"]}`}/>
-                                    <label htmlFor="check"><span className={`${style["icon"]}`}/> Keep me Signed in</label>
+                                    <label htmlFor="check"><span className={`${style["icon"]}`}/>Запомнить меня</label>
                                 </div>
                                 <div className=  {`${style["group"]}`}>
                                     <button  className={`${style["button"]}`}
-                                             type="submit">Sign In
+                                             type="submit">Войти
                                     </button>
                                 </div>
                                 <div className={`${style["hr"]}`}/>
                                 <div className={`${style["foot-lnk"]}`}>
-                                    <a href={"forgot"}>Forgot Password?</a>
+                                    <a href={"forgot"}>Забыли Пароль?</a>
                                 </div>
                             </div>
                             <div className={`${style["sign-up-htm"]}`}>
                                 <div className=  {`${style["group"]}`}>
-                                    <label htmlFor="pass" className=  {`${style["label"]}`}>Email Address</label>
+                                    <label htmlFor="pass" className=  {`${style["label"]}`}>Почта</label>
                                     <Field
                                         id="register/email"
                                         name="register/email"
@@ -108,7 +108,7 @@ console.log(props.user);
                                     />
                                 </div>
                                 <div className=  {`${style["group"]}`}>
-                                    <label htmlFor="user" className=  {`${style["label"]}`}>Username</label>
+                                    <label htmlFor="user" className=  {`${style["label"]}`}>Имя пользователя</label>
                                     <Field
                                         id="register/username"
                                         name="register/username"
@@ -118,7 +118,7 @@ console.log(props.user);
                                     />
                                 </div>
                                 <div className=  {`${style["group"]}`}>
-                                    <label htmlFor="user" className=  {`${style["label"]}`}>Display name</label>
+                                    <label htmlFor="user" className=  {`${style["label"]}`}>Псевдоним</label>
                                     <Field
                                         id="register/displayName"
                                         name="register/displayName"
@@ -128,7 +128,7 @@ console.log(props.user);
                                     />
                                 </div>
                                 <div className=  {`${style["group"]}`}>
-                                    <label htmlFor="pass" className=  {`${style["label"]}`}>Password</label>
+                                    <label htmlFor="pass" className=  {`${style["label"]}`}>Пароль</label>
                                     <Field
                                         id="register/password"
                                         name="register/password"
@@ -139,7 +139,7 @@ console.log(props.user);
                                     />
                                 </div>
                                 <div className=  {`${style["group"]}`}>
-                                    <label htmlFor="pass" className=  {`${style["label"]}`}>Repeat Password</label>
+                                    <label htmlFor="pass" className=  {`${style["label"]}`}>Подтверждение Пароля</label>
                                     <Field
                                         id="register/repeat_password"
                                         name="register/repeat_password"
@@ -151,12 +151,12 @@ console.log(props.user);
                                 </div>
                                 <div className=  {`${style["group"]}`}>
                                     <button  className={`${style["button"]}`}
-                                            type="submit">Sign Up
+                                            type="submit">Зарегестрироватся
                                     </button>
                                 </div>
                                 <div className={`${style["hr"]}`}/>
                                 <div className={`${style["foot-lnk"]}`}>
-                                    <label htmlFor="tab-1">Already Member?</label>
+                                    <label htmlFor="tab-1">Уже Зарегестрированы?</label>
                                 </div>
                             </div>
                         </div>

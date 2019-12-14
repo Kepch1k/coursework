@@ -24,28 +24,6 @@ function RichTextEditor(props) {
         EditorState.createEmpty()
     );
 
-    // const noteOnChange = () => {
-    //     const rawDraftContentState = JSON.stringify( convertToRaw(editorState.getCurrentContent()) );
-    //     props.setCurrentNote(rawDraftContentState);
-    // };
-
-    // the raw state, stringified
-
-
-    //const contentState2 = convertFromRaw( JSON.parse( rawDraftContentState) );
-   // this.props.setCurrentNote(rawDraftContentState);
-   // console.log(rawDraftContentState);
-
-// convert the raw state back to a useable ContentState object
-
-
-   // console.log(contentState2);
-
-
-
-    const editorState2= {...editorState};
-    //console.log(editorState.getSelection(),RichUtils) ;
-
     const focus = () => RichTextEditorRef.focus();
     const handleKeyCommand = (command) => _handleKeyCommand(command);
     const onTab = (e) => _onTab(e);
@@ -90,9 +68,6 @@ function RichTextEditor(props) {
             default: return null;
         }
     }
-
-        // If the user changes block type before entering any text, we can
-        // either style the placeholder or hide it. Let's just hide it now.
         let className = style['RichEditor-editor'];
         let contentState = editorState.getCurrentContent();
         if (!contentState.hasText()) {
@@ -122,7 +97,7 @@ function RichTextEditor(props) {
                         props.setCurrentNote(rawDraftContentState);
                     }}
                     onTab={onTab}
-                    placeholder="write here"
+
                     ref={(input) => { RichTextEditorRef = input; }}
                     spellCheck={true}
                 />
@@ -130,7 +105,7 @@ function RichTextEditor(props) {
         </div>
         );
 }
-//onChange={setEditorState}
+//onChange={setEditorState}  placeholder="write here"
 
 //-----------------------------------------
 

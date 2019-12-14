@@ -1,5 +1,7 @@
 import React from 'react';
 import StartPage from './pages/StartPage/StartPage';
+import ListOfUserNotes from './pages/ListOfUserNotes/ListOfUserNotes';
+import NotFound from './pages/NotFound/NotFound';
 import {Route, Router, Switch} from "react-router-dom";
 import CheckUser from './components/HOC/checkUser';
 import history from './boot/browserHistory';
@@ -19,6 +21,8 @@ function App() {
         <Router history={history}>
                 <Switch>
                     <Route path="/" exact component={StartPage}/>
+                    <Route path="/user_notes/" exact component={ListOfUserNotes}/>
+                    <Route component={NotFound}/>
                 </Switch>
             </Router>
         </CheckUser>

@@ -54,16 +54,11 @@ module.exports.deleteNote = async (req, res, next) => {
 };
 
 module.exports.getNote = async (req, res, next) => {
-    const files = req.files;
-    const payload = req.body;
-    const id = req.params.id;
-    const {fileNames} = _.pick(payload, 'fileNames');
+    const {idUser} = req;
     try {
-        const savedFiles = await pathsToFiles(files);
-        const data = await preparingData(payload, savedFiles, id);
-        const createdContest = await Contest.create(data);
+        const foundedNote = await Note.find({where: {userId:idUser}});
         res.send({
-            contest: createdContest.dataValues
+            notes: foundedNote.dataValues
         });
     } catch (e) {
         console.log(e);

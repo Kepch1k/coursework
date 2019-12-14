@@ -74,6 +74,11 @@ ins {
     min-height: 100%;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
+
 body {
     max-width: calc(100vw - (100vw - 100%)) !important;
     margin: 0;

@@ -13,7 +13,7 @@ const initialState = {
        "first",
    ],
     currentNote:null,
-    title:"Test Name",
+    title:"Тестовое Название",
 
 };
 

@@ -17,11 +17,15 @@
     justify-content: center;
     align-items: center;
 
+    border:5px solid rgba(0,0,0,0.6);
+    box-shadow: 2px 2px 3px rgba(255,255,255,0.1);
+    margin-bottom:10px;
+    padding: 5px;
+
     .title{
       color:white;
-      color: rgba(0,0,0,0.6);
+      //color: rgba(0,0,0,0.6);
       font-size: 60px;
-      margin-bottom:10px;
       text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
 
     }

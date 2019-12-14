@@ -9,16 +9,10 @@ function Header(props) {
             </div>
             <div className={`${style.list}`}>
                 <div className={`${style.itemOfList}`}>
-                    главное меню 1
+                    пункт 1
                 </div>
                 <div className={`${style.itemOfList}`}>
-                    главное меню 2
-                </div>
-                <div className={`${style.itemOfList}`}>
-                    главное меню 3
-                </div>
-                <div className={`${style.itemOfList}`}>
-                    главное меню 4
+                    пункт 2
                 </div>
                 <div className={`${style.hamburger}`}>
                     <i className="fa fa-bars"/>

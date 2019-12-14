@@ -7,7 +7,7 @@ const email = 'justins' + random + '@gmail.com';
 module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('Notes', [{
-            userId: 1,
+            userId: 5,
             tags: ["5balls","smth"],
             titleOfNote: 'GG',
             contain: 'this is a contain for note',
