@@ -8,6 +8,7 @@ const initialState = {
     user: null,
     updated: false,
     banned: false,
+    notes:null,
 };
 
 export default function (state = initialState, action) {
@@ -54,6 +55,13 @@ export default function (state = initialState, action) {
                 loginFailed: true,
             };
         }
+        case ACTION.SET_USER_NOTES: {
+            return {
+                ...state,
+               notes:action.notes,
+            };
+        }
+
 
         default: {
             return state;

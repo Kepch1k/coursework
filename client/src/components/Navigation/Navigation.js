@@ -1,27 +1,95 @@
 import React,{useState,useEffect} from 'react';
 import style from './Navigation.module.scss';
 import connect from 'react-redux/es/connect/connect';
-import {showingOrHidingNavigation,writeHtml} from "../../actions/actionCreator";
+import {Link} from 'react-router-dom';
+import {showingOrHidingNavigation,writeHtml,doReAnimation} from "../../actions/actionCreator";
+import siteFooter from '../../functionsForAnimation/navigation/setSiteFooter';
+import deepEqual from '../../functionsForAnimation/navigation/deepEqual';
+import onResizeWindow from '../../functionsForAnimation/navigation/onResizeWindow';
+import checkNeedReAnimation from '../../functionsForAnimation/navigation/checkNeedReAnimation';
 import LoginOrRegister from '../Login/LoginOrRegister';
+import history from "../../boot/browserHistory";
 
 function Navigation(props) {
 
-    function deepEqual (obj1, obj2){
-        return JSON.stringify(obj1)===JSON.stringify(obj2);
+    const [isHistoryListenCalled, setIsHistoryListenCalled] = useState(
+        false
+    );
+
+    const [isLogin, setIsLogin] = useState(
+        props.user
+    );
+
+
+    const [needReAnimation, setNeedReAnimation] = useState(
+        false
+    );
+//-----------------------------------
+    if(!isHistoryListenCalled){
+        setIsHistoryListenCalled(true);
+        history.listen(_ => {
+            props.doReAnimation(true);
+        });
     }
 
-     const [isLogin, setIsLogin] = useState(
-        props.user
-     );
+   // console.log(props.Nav.reAnimation);
 
-     if(!deepEqual(isLogin,props.user)){
-         setIsLogin(props.user);
-         const id = setInterval(()=>{
-             onResize();
-         },100);
-       setTimeout(()=>{clearInterval(id)},5000);
-     }
+    if(checkNeedReAnimation()){
+        //console.log("onResize    outside");
+        setTimeout(()=>{
 
+            onResize();
+
+        //console.log("onResize    ")
+        },0);
+    }else{
+         setTimeout(()=>{
+
+            if(props.Nav.reAnimation!==false){
+                props.doReAnimation(false);
+            }
+            },0);
+    }
+
+   // console.log("render");
+   // console.log("props.Nav.reAnimation",props.Nav.reAnimation);
+
+    //-----------------------------
+    //
+    // if(props.Nav.reAnimation){
+    //     props.doReAnimation(false);
+    //     console.log("setNeedReAnimation TRUE");
+    //     setTimeout(()=>{setNeedReAnimation(true);},0);
+    // }
+
+    // if(needReAnimation){
+    //     setTimeout(()=>{
+    //         const mainPiece = document.getElementById("mainPiece");
+    //         const navigationWidth = document.getElementById("navigation").offsetWidth;
+    //         const screenWidth = window.innerWidth;
+    //         if(mainPiece.offsetWidth===(screenWidth - navigationWidth)){
+    //             setNeedReAnimation(false);
+    //         }else{
+    //             onResizeWindow();
+    //         }
+    //     },0)
+    //
+    // }
+
+    if(!deepEqual(isLogin,props.user)) {
+        setIsLogin(props.user);
+        setTimeout(()=>{props.doReAnimation(true);},0);
+    }
+
+     // if(!deepEqual(isLogin,props.user)){
+     //     setIsLogin(props.user);
+     //     setNeedReAnimation(true);
+     //   //   const id = setInterval(()=>{
+     //   //       onResizeWindow();
+     //   //
+     //   //   },500);
+     //   // setTimeout(()=>{clearInterval(id)},10000);
+     // }
 
     document.ready=()=>{
         props.writeHtml({
@@ -34,22 +102,11 @@ function Navigation(props) {
 
     function onResize() {
         if(document.getElementById("navigation")&&document.getElementById("controller")){
-            if(
-                (props.Nav.parameters)
-            ) {
                     props.writeHtml({
                         navigation: document.getElementById("navigation").offsetWidth,
                         controller: document.getElementById("controller").offsetWidth,
                     });
-                    const mainPiece = document.getElementById("mainPiece");
-                    const mainPieceHeight = mainPiece.offsetHeight;
-                    const screenHeight = window.innerHeight;
-                    //const addedWidth = (screenHeight < mainPieceHeight) ? 15 : 0;
-                    const navigationWidth = document.getElementById("navigation").offsetWidth;//+15;
-                    const screenWidth = window.innerWidth;
-                    mainPiece.style.width = (screenWidth - navigationWidth) + "px";
-                    siteFooter();
-            }
+                onResizeWindow();
         }
     }
 
@@ -59,7 +116,6 @@ function Navigation(props) {
             if(
                 (props.Nav.parameters)
             ) {
-                    console.log(props.Nav.parameters.navigation,document.getElementById("navigation").offsetWidth);
                     props.writeHtml({
                         navigation:document.getElementById("navigation").offsetWidth,
                         controller:document.getElementById("controller").offsetWidth,
@@ -67,9 +123,6 @@ function Navigation(props) {
                     const navigationWidth = props.Nav.parameters.navigation;
                     const controllerWidth = props.Nav.parameters.controller;
                     const mainPiece = document.getElementById("mainPiece");
-                    const mainPieceHeight=mainPiece.offsetHeight;
-                    const screenHeight = window.innerHeight;
-                  //  const addedWidth = (screenHeight<mainPieceHeight)?15:0;
                     const newNavigationWidth = (props.Nav.show)?(controllerWidth):(navigationWidth);
                     const screenWidth = window.innerWidth;
                     mainPiece.style.width=(screenWidth-newNavigationWidth)+"px";
@@ -79,40 +132,15 @@ function Navigation(props) {
 
     }
 
-    function siteFooter() {
-
-        if(document.getElementById('content') && document.getElementById('footer')){
-            const siteContent = document.getElementById('content');
-            const siteFooterHeight = document.getElementById('footer').offsetHeight;
-            siteContent.style.marginBottom=(siteFooterHeight)+"px";
-
-        }
-
-    }
-
     window.onload=()=>{
         props.writeHtml({
             navigation:document.getElementById("navigation").offsetWidth,
             controller:document.getElementById("controller").offsetWidth,
         });
-        // const mainPiece = document.getElementById("mainPiece");
-        // mainPiece.style.width=mainPiece.offsetWidth+"px";
-        props.writeHtml({
-            navigation: document.getElementById("navigation").offsetWidth,
-            controller: document.getElementById("controller").offsetWidth,
-        });
-        const mainPiece = document.getElementById("mainPiece");
-        const mainPieceHeight = mainPiece.offsetHeight;
-        const screenHeight = window.innerHeight;
-        //const addedWidth = (screenHeight < mainPieceHeight) ? 15 : 0;
-        const navigationWidth = document.getElementById("navigation").offsetWidth;//+15;
-        const screenWidth = window.innerWidth;
-        mainPiece.style.width = (screenWidth - navigationWidth) + "px";
-        siteFooter();
+        onResizeWindow();
     };
 
     window.onresize=()=>{
-        console.log("awdawd");
         onResize();
     };
 
@@ -166,7 +194,8 @@ function Navigation(props) {
 
     const accountMenuToRender = accountMenu.map((el,index,array)=>{
         const lastElement=((index + 1) === array.length)?style.lastElement:"";
-       return <div className={`${style.itemOfList} ${lastElement}`} key={index}>
+        const link = (el.ru==="Мои записи")?"/":"/gg/";
+       return  <Link to={link} key={index}><div className={`${style.itemOfList} ${lastElement}`} >
            <div className={`${style.contain}`}>
                {el.ru}
            </div>
@@ -174,6 +203,7 @@ function Navigation(props) {
                {el.numberOfNewSmth}
            </div>:<></>}
        </div>
+       </Link>
     });
     return (
     /*(
@@ -284,6 +314,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
     showingOrHidingNavigation: (data) => dispatch(showingOrHidingNavigation(data)),
     writeHtml: (data) => dispatch(writeHtml(data)),
+    doReAnimation: (data) => dispatch(doReAnimation(data)),
+
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(Navigation);

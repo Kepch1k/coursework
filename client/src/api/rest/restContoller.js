@@ -9,7 +9,7 @@ export const userIsLogin = () => axios.get(`${restURL}/user`);
 export const noteSave = data => axios.post(`${restURL}/note`, (data));
 export const noteUpdate = data =>axios.put(`${restURL}/note`, (data));
 export const noteDelete = (data) => axios.delete(`${restURL}/note`, (data));
-export const getNote = (data) => axios.get(`${restURL}/note/${data}`);
+export const getNote = () => axios.get(`${restURL}/note`);
 
 /*export const contestFilter = ({url}) => {
     history.replace(`${history.location.pathname}?${url.split('?')[1]}`);

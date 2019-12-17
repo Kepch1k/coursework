@@ -5,7 +5,7 @@ import connect from 'react-redux/es/connect/connect';
 import "draft-js/dist/Draft.css";
 import BlockStyleControls from './BlockStyleControls/BlockStyleControls';
 import InlineStyleControls from './InlineStyleControls/InlineStyleControls';
-import {setCurrentNote} from "../../actions/actionCreator";
+import {setCurrentNote} from "../../../actions/actionCreator";
 
 const styleMap = {
     CODE: {
@@ -17,12 +17,18 @@ const styleMap = {
 };
 
 function RichTextEditor(props) {
-
+    console.log("render")    ;
     let RichTextEditorRef = null;
 
+   // console.log(convertFromRaw(JSON.parse(props.note.currentNote)));
+    console.log(props.note.currentNote);
     const [editorState, setEditorState] = useState(
-        EditorState.createEmpty()
+        (props.note.currentNote)?EditorState.createWithContent(convertFromRaw(JSON.parse(props.note.currentNote))):EditorState.createEmpty()
     );
+
+    // if(props.note.currentNote){
+    //     setEditorState(convertFromRaw( JSON.parse( props.note.currentNote) ));
+    // }
 
     const focus = () => RichTextEditorRef.focus();
     const handleKeyCommand = (command) => _handleKeyCommand(command);

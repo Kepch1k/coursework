@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import style from './AddTagButton.module.scss';
 import connect from 'react-redux/es/connect/connect';
-import {changeCurrentTags, addCommonNotification, addSpecialNotification} from "../../../actions/actionCreator";
+import {changeCurrentTags, addCommonNotification, addSpecialNotification} from "../../../../actions/actionCreator";
 
 class Message {
     constructor(text="false warning",timer=5000,type="warn") {

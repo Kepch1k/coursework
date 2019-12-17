@@ -1,6 +1,7 @@
 import React from 'react';
-import StartPage from './pages/StartPage/StartPage';
+import NotePage from './pages/NotePage/NotePage';
 import ListOfUserNotes from './pages/ListOfUserNotes/ListOfUserNotes';
+import ListOfNotesPage from './pages/ListOfNotesPage/ListOfNotesPage';
 import NotFound from './pages/NotFound/NotFound';
 import {Route, Router, Switch} from "react-router-dom";
 import CheckUser from './components/HOC/checkUser';
@@ -20,8 +21,9 @@ function App() {
         <ToastContainer/>
         <Router history={history}>
                 <Switch>
-                    <Route path="/" exact component={StartPage}/>
-                    <Route path="/user_notes/" exact component={ListOfUserNotes}/>
+                    <Route path="/note" exact component={NotePage}/>
+                    {/*<Route path="/user_notes/" exact component={ListOfUserNotes}/>*/}
+                    <Route path="/" exact component={ListOfNotesPage}/>
                     <Route component={NotFound}/>
                 </Switch>
             </Router>

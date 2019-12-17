@@ -4,6 +4,7 @@ const initialState = {
     Nav:{
         show:true,
         parameters:null,
+        reAnimation:false,
     },
 };
 
@@ -32,6 +33,18 @@ export default function (state = initialState, action) {
                 }
             };
         }
+
+        case ACTION.DO_RE_ANIMATION: {
+            return {
+                ...state,
+                Nav: {
+                    ...state.Nav,
+                    reAnimation:
+                        action.do,
+                }
+            };
+        }
+
 
         // case ACTION.SET_USER: {
         //

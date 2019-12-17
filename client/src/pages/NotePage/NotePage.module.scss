@@ -1,0 +1,20 @@
+.startPage {
+
+}
+
+.mainPiece{
+ float: right;
+  transition: width 0.3s linear;
+
+  .content{
+    //min-height:100vh;
+    z-index: 10;
+    background-color: #0B3157;
+    position: relative;
+  }
+
+}
+
+a {
+  text-decoration: none;
+}

@@ -21,7 +21,6 @@ export const noUser = () => {
 };
 
 export const showingOrHidingNavigation = ({show}) => {
-    console.log("show1:",show);
     return ({
         type: ACTION.SHOW_OR_HIDE_NAVIGATION,
         show:show,
@@ -95,6 +94,34 @@ export const deleteNote = (data) => {
     return ({
         type: ACTION.DELETE_NOTE,
         note:data,
+    })
+};
+
+export const createNote = (data) => {
+    return ({
+        type: ACTION.CREATE_NOTE,
+        note:data,
+    })
+};
+
+export const changeNote = (data) => {
+    return ({
+        type: ACTION.CHANGE_NOTE,
+        note:data,
+    })
+};
+
+
+export const doReAnimation = (data) => {
+    return ({
+        type: ACTION.DO_RE_ANIMATION,
+        do:data,
+    })
+};
+
+export const getUserNotes = () => {
+    return ({
+        type: ACTION.GET_USER_NOTES,
     })
 };
 

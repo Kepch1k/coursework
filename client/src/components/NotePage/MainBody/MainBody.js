@@ -4,7 +4,7 @@ import RichTextEditor from '../RichTextEditor/RichTextEditor';
 import ListOfTags from '../ListOfTags/ListOfTags';
 import AddTagButton from './AddTagButton/AddTagButton';
 import ManagePanel from '../ManagePanel/ManagePanel';
-import {showingOrHidingNavigation, writeHtml} from "../../actions/actionCreator";
+import {showingOrHidingNavigation, writeHtml} from "../../../actions/actionCreator";
 import connect from 'react-redux/es/connect/connect';
 
 function MainBody(props) {

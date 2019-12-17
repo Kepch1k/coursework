@@ -19,9 +19,9 @@ module.exports = {
             },
             tags: {
                 type: Sequelize.ARRAY(Sequelize.TEXT),
-                allowNull: false,
+                allowNull: true,
                 validate: {
-                    notEmpty: true,
+                    notEmpty: false,
                 },
             },
             titleOfNote: {

@@ -1,20 +1,10 @@
 import ACTION from '../actions/actiontsTypes';
 
 const initialState = {
-   tags:[
-       "first",
-       "second",
-       "first",
-       "second",
-       "first",
-       "second",
-       "first",
-       "second",
-       "first",
-   ],
+    tags:[],
     currentNote:null,
-    title:"Тестовое Название",
-
+    title:"Безымянный",
+    state:"creating",
 };
 
 export default function (state = initialState, action) {
@@ -39,6 +29,17 @@ export default function (state = initialState, action) {
             console.log(action);
             return {
                 ...state,
+                ...action.note
+            };
+        }
+
+        case ACTION.RESET_NOTE: {
+            return {
+                ...state,
+                tags:[],
+                currentNote:null,
+                title:"Безымянный",
+                state:"creating",
             };
         }
 

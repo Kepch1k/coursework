@@ -30,6 +30,28 @@ export function* deleteNoteSaga({note}) {
     }
 }
 
+export function* createNoteSaga({note}) {
+    console.log("new project register:",note);
+    try {
+        yield put({type: ACTION.RESET_NOTE});
+       // const RES = yield noteDelete(note);
+    } catch (e) {
+    }
+}
+
+export function* changeNoteSaga({note}) {
+    console.log("new project register:",note);
+    try {
+        const noteTo = _.pick(note,["tags","titleOfNote","contain"]);
+        noteTo.currentNote=noteTo.contain;
+        noteTo.state="updating";
+        delete noteTo.contain;
+        console.log(noteTo);
+        yield put({type: ACTION.SET_NOTE, note: noteTo});
+    } catch (e) {
+    }
+}
+
 export function* getNoteSaga({note}) {
     console.log("new project register:",note);
     try {

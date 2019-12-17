@@ -1,6 +1,6 @@
 import {put} from 'redux-saga/effects';
 import ACTION from '../actions/actiontsTypes';
-import {changePassword, checkEmail, userIsLogin, userLogin, userSignUpLogin} from '../api/rest/restContoller';
+import {getNote, userIsLogin, userLogin, userSignUpLogin} from '../api/rest/restContoller';
 import {ACCESS_TOKEN,TOKENS_KEY} from '../constants/consts';
 import history from '../boot/browserHistory';
 
@@ -86,5 +86,15 @@ export function* isLoginSaga() {
         }
     } catch (e) {
         yield put({type: ACTION.IS_LOGIN_ERROR, error: e});
+    }
+}
+
+export function* getNotes() {
+    try {
+        const {data} = yield getNote();
+        yield put({type: ACTION.SET_USER_NOTES, notes: data.notes});
+        //console.log(data);
+    } catch (e) {
+       // yield put({type: ACTION.IS_LOGIN_ERROR, error: e});
     }
 }

@@ -12,7 +12,7 @@ console.log("req.preparedData",req.preparedData);
             note: createdNote.dataValues
         });
     } catch (e) {
-       // console.log(e);
+        console.log(e);
         next(e);
     }
 };
@@ -56,9 +56,13 @@ module.exports.deleteNote = async (req, res, next) => {
 module.exports.getNote = async (req, res, next) => {
     const {idUser} = req;
     try {
-        const foundedNote = await Note.find({where: {userId:idUser}});
+        const foundedNotes = await Note.findAll({where: {userId:idUser}});
+        const notesToSend = foundedNotes.map((e)=>{
+           return e.dataValues;
+        });
+       // console.log(foundedNote);
         res.send({
-            notes: foundedNote.dataValues
+            notes: notesToSend
         });
     } catch (e) {
         console.log(e);

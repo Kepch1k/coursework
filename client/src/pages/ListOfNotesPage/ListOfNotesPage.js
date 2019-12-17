@@ -1,20 +1,21 @@
 import React from 'react';
-import style from './ListOfUserNotes.module.scss';
+import style from './ListOfNotesPage.module.scss';
 import Header from '../../components/Header/Header'
 import connect from 'react-redux/es/connect/connect';
 import Footer from '../../components/Footer/Footer';
-import MainBody from '../../components/NotePage/MainBody/MainBody';
+import MainBody from '../../components/ListOfNotesPage/MainBody/MainBody';
 import Navigation from '../../components/Navigation/Navigation';
 
-function ListOfUserNotes(props) {
+function ListOfNotesPage(props) {
 
     return (
         <div className={style.startPage}>
+
             <Navigation/>
             <div id={"mainPiece"} className={`${style.mainPiece}`}>
                 {/*<Header/>*/}
                 <div id={"content"} className={`${style.content}`}>
-                  Another
+                   <MainBody/>
                 </div>
                 <Footer/>
             </div>
@@ -28,4 +29,4 @@ const mapStateToProps = (state) => {
         userContests: state.userContestsReducers,
     };
 };
-export default connect(mapStateToProps)(ListOfUserNotes);
+export default connect(mapStateToProps)(ListOfNotesPage);

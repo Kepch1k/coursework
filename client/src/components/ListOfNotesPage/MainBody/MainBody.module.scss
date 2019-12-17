@@ -1,0 +1,21 @@
+.mainBody{
+  //background: green;
+  padding: 15px;
+
+  .listOfNotes{
+    color:white;
+
+    .note{
+      cursor: pointer;
+      margin-bottom: 20px;
+      padding: 10px;
+      //border-bottom: 1px solid white;
+    }
+
+    .selected{
+      color:black;
+      background: #1abc9c;
+    }
+  }
+
+}
