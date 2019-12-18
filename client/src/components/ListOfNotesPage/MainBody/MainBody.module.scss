@@ -2,19 +2,58 @@
   //background: green;
   padding: 15px;
 
+  .title{
+    text-align: center;
+    width: 100%;
+    color: whitesmoke;
+    font-weight: 600;
+    line-height: 30px;
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
   .listOfNotes{
     color:white;
+
+    .titleOfNote{
+      margin-bottom: 20px;
+      padding: 10px;
+      color:whitesmoke;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
 
     .note{
       cursor: pointer;
       margin-bottom: 20px;
       padding: 10px;
+      transition: all 0.3s linear;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
       //border-bottom: 1px solid white;
     }
 
     .note:hover{
       background: #1abc9c;
       color:black;
+    }
+
+    .symbolBeforeTitle{
+      font-family: 'Font Awesome\ 5 Free';
+      content: "\f02e ";
+      font-weight: 900;
+      color:greenyellow;
+    }
+
+    .note.selected>div>.symbolBeforeTitle{
+      font-weight: 900;
+      font-family: 'Font Awesome\ 5 Free';
+      content: "\f02e ";
+      color:blue;
     }
 
     .selected{

@@ -3,6 +3,7 @@ import ACTION from '../actions/actiontsTypes';
 import {getNote, userIsLogin, userLogin, userSignUpLogin, logout} from '../api/rest/restContoller';
 import {ACCESS_TOKEN,TOKENS_KEY} from '../constants/consts';
 import history from '../boot/browserHistory';
+import Message from "../utils/Message";
 
 const _ = require('lodash');
 
@@ -33,15 +34,15 @@ export function* loginSaga({dataToSend}) {
             } else {
                 history.push('/');
             }
-        } else if (RES.response.data === "ManagePanel is baned") {
-            yield put({type: ACTION.LOGIN_BANNED});
+        } else if (RES.response.data === "User not founds") {
+            yield put({type: ACTION.ADD_COMMON_NOTIFICATION, message:new Message("Такого пользователя не существует",6000,"info")});
         } else if (RES.response.data === "ManagePanel not founds") {
             yield put({type: ACTION.USER_ERROR, error: RES.response});
         }
     } catch (e) {
     }
 }
-
+//
 // sign up user
 export function* signUpSaga({dataToSend}) {
    // console.log("new project register:",dataToSend);
@@ -63,7 +64,10 @@ export function* signUpSaga({dataToSend}) {
             } else {
                 history.push('/');
             }
+        }else if (RES.response.data === "Entered relevant data") {
+            yield put({type: ACTION.ADD_COMMON_NOTIFICATION, message:new Message("пользователь с такой почтой уже зарегистрирован",8000,"warn")});
         }
+
         if (dataToSend['pageToRedirect']) {
             history.push(dataToSend['pageToRedirect']);
         } else {
@@ -108,8 +112,8 @@ export function* logoutSaga() {
         const data = {token: tokensParse.refresh};
         yield logout(data);
         yield put({type: ACTION.USER_LOGOUT});
-       // sessionStorage.clear();
-       // localStorage.clear();
+        sessionStorage.clear();
+        localStorage.clear();
     } catch (e) {
     }
 }

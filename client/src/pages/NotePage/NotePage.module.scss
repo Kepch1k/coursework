@@ -26,7 +26,7 @@
     content:'401';
   }
   .no-401::after{
-    content:'Unauthorized';
+    content:'Неавторизован';
   }
 
   .error::before{

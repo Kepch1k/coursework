@@ -80,6 +80,7 @@ function Navigation(props) {
         setIsLogin(props.user);
         setTimeout(()=>{props.doReAnimation(true);},0);
     }
+    //console.log(props.user);
 
      // if(!deepEqual(isLogin,props.user)){
      //     setIsLogin(props.user);
@@ -156,7 +157,7 @@ function Navigation(props) {
     const [accountMenu, setAccountMenu] = useState([
         {
             ru:"Мои записи",
-            numberOfNewSmth:1,
+            numberOfNewSmth:null    ,
         },
         {
             ru:"Сообщения",
@@ -183,7 +184,7 @@ function Navigation(props) {
             numberOfNewSmth:null,
         },
         {
-            ru:"Выход",
+            ru:"Выход из аккаунта",
             numberOfNewSmth:null,
         },
     ]);
@@ -201,10 +202,10 @@ function Navigation(props) {
         let link;
         switch (el.ru) {
             case "Мои записи":link ="/";break;
-            case "Выход":link ="/";break;
+            case "Выход из аккаунта":link ="/";break;
             default :link ="/gg/";
         }
-       return  <Link to={link} key={index}><div className={`${style.itemOfList} ${lastElement}`} onClick={(el.ru==="Выход")?()=>{props.logout();console.log("logout");}:()=>{}}>
+       return  <Link to={link} key={index}><div className={`${style.itemOfList} ${lastElement}`} onClick={(el.ru==="Выход из аккаунта")?()=>{props.logout();console.log("logout");}:()=>{}}>
            <div className={`${style.contain}`}>
                {el.ru}
            </div>
@@ -261,7 +262,7 @@ function Navigation(props) {
                 <div className={`${style.accountProfile}`} >
                     <div className={`${style.avatar}`} style={{backgroundImage:"url(http://gimnazija.com.ua/wp-content/uploads/2017/03/no-avatar-300x300.png)"}}/>
                     <div className={`${style.info}`}>
-                        {user.nickName}
+                        {props.user.displayName||user.nickName}
                     </div>
                     <div className={`${style.subInfo}`}>
                         <div className={`${style.preLine}`}>

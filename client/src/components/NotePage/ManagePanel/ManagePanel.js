@@ -1,15 +1,20 @@
 import React,{useState} from 'react';
 import style from './ManagePanel.module.scss';
 import connect from 'react-redux/es/connect/connect';
-import {saveNote, updateNote, getUserNotes} from "../../../actions/actionCreator";
+import {saveNote, updateNote, getUserNotes, addCommonNotification} from "../../../actions/actionCreator";
 import history from "../../../boot/browserHistory";
+import Message from "../../../utils/Message";
 
 function ManagePanel(props) {
     const buttonToRender=(props.note.state==="creating")?
         <div className={`${style.button_wrapper}`}>
             <div className={`${style.btn} ${style.third}`} onClick={()=>{
-                props.saveNote(props.note);
-                setTimeout(()=>{ history.push('/')},0);
+                if(props.note.currentNote){
+                    props.saveNote(props.note);
+                    setTimeout(()=>{ history.push('/')},0);
+                }else{
+                    props.addCommonNotification(new Message("Запись не может быть пустой",4000,"error"));
+                }
             }}>
                 Сохранить
             </div>
@@ -17,8 +22,12 @@ function ManagePanel(props) {
         :
         <div className={`${style.button_wrapper}`}>
             <div className={`${style.btn} ${style.fifth}`} onClick={()=>{
-                props.updateNote(props.note);
-                setTimeout(()=>{ history.push('/')},0);
+                if(props.note.currentNote){
+                    props.updateNote(props.note);
+                    setTimeout(()=>{ history.push('/')},0);
+                }else{
+                    props.addCommonNotification(new Message("Запись не может быть пустой",4000,"error"));
+                }
             }}>
                 Обновить
             </div>
@@ -39,6 +48,7 @@ const mapDispatchToProps = (dispatch) => ({
     saveNote: (data) => dispatch(saveNote(data)),
     updateNote: (data) => dispatch(updateNote(data)),
     getUserNotes: () => dispatch(getUserNotes()),
+    addCommonNotification: (data) => dispatch(addCommonNotification(data)),
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(ManagePanel);
