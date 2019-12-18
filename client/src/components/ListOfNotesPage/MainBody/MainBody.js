@@ -3,6 +3,7 @@ import style from './MainBody.module.scss';
 import {getUserNotes} from "../../../actions/actionCreator";
 import ManagePanel from '../ManagePanel/ManagePanel';
 import connect from 'react-redux/es/connect/connect';
+import getTime from "../../../otherFunctions/getTimejs";
 
 function MainBody(props) {
 
@@ -23,23 +24,12 @@ function MainBody(props) {
     });
 
     let notesToRender=[];
-    //2019-12-18T16:21:02.630Z
-    const convertData = (e)=>{
-        let newData = e.slice(0,4);
-        newData +="."+e.slice(5,7);
-        newData +="."+e.slice(8,10);
-        newData +=" "+e.slice(11,13);
-        newData +=":"+e.slice(14,16);
-        newData +=":"+e.slice(17,19);
-        return newData
-    };
     if(props.user){
         if(props.user.notes){
             console.log( props.user.notes);
-
             notesToRender = props.user.notes.map((e)=>{
                 return <li key={e.id} className={`${style.note} ${(e.id===selectedNote)?style.selected:""}`} onClick={()=>{setSelectedNote(e.id)}}>
-                    <div><i className={`${style.symbolBeforeTitle} fas fa-bookmark`}/> {e.titleOfNote}</div> <div>{convertData(e.updatedAt)}</div>
+                    <div><i className={`${style.symbolBeforeTitle} fas fa-bookmark`}/> {e.title||e.titleOfNote}</div> <div>{getTime(e.updatedAt).format("YYYY.MM.DD HH:mm:ss")}</div>
                 </li>
             });
             notesToRender.unshift(<li key={"title"} className={`${style.titleOfNote}`}>

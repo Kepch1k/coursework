@@ -186,13 +186,19 @@ function NotFound(props) {
             </div>
 
             <div id={`${style["main-content"]}`}>
-                <h1>We couldn't find what you were looking for.</h1>
+                {/*<h1>We couldn't find what you were looking for.</h1>*/}
+                <h1> Мы не смогли найти то, что вы искали.</h1>
 
-                <p>Unfortunately the page you were looking for could not be found. It may be
-                    temporarily unavailable, moved or no longer exist.</p>
+                {/*<p>Unfortunately the page you were looking for could not be found. It may be*/}
+                {/*    temporarily unavailable, moved or no longer exist.</p>*/}
 
-                <p>Check the URL you entered for any mistakes and try again. Alternatively, search
-                    for whatever is missing or take a look around the rest of our site.</p>
+                {/*<p>Check the URL you entered for any mistakes and try again. Alternatively, search*/}
+                {/*    for whatever is missing or take a look around the rest of our site.</p>*/}
+
+
+                <p>К сожалению, страницу, которую вы искали, не удалось найти. Страница может быть временно недоступно, перемещено или больше не существует.</p>
+
+                <p>Проверьте введенный вами URL на наличие ошибок и повторите попытку.</p>
 
                 {/*<div id={`${style["search"]}`}>*/}
                 {/*    <form>*/}
@@ -204,11 +210,11 @@ function NotFound(props) {
                     <a className={`${style["navigation"]}`} href="" onClick={(e)=>{
                         e.preventDefault();
                         history.push("/");
-                    }}>Home</a>
+                    }}>На главную</a>
                     <a className={`${style["navigation"]}`} href="" onClick={(e)=>{
                         e.preventDefault();
                         history.goBack();
-                    }}>Back</a>
+                    }}>Назад</a>
                     {/*<a className={`${style[""]}`} href="">Site Map</a>*/}
                     {/*<a className={`${style["navigation"]}`} href=*/}
                     {/*    "">Contact</a>*/}

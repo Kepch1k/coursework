@@ -22,7 +22,7 @@ export function* updateNoteSaga({note}) {
         if(RES.statusText==="OK"){
             const noteTo = {};
             noteTo.contain=note.currentNote;
-            noteTo.titleOfNote=note.title;
+            noteTo.title=note.title;
             noteTo.tags=note.tags;
             noteTo.id=note.id;
             console.log(noteTo);
@@ -61,6 +61,7 @@ export function* changeNoteSaga({note}) {
         noteTo.currentNote=noteTo.contain;
         noteTo.state="updating";
         noteTo.id=note.id;
+        noteTo.title=note.titleOfNote;
         delete noteTo.contain;
         console.log(noteTo);
         yield put({type: ACTION.SET_NOTE, note: noteTo});

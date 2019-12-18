@@ -24,7 +24,7 @@ function ManagePanel(props) {
                         let neededNote;
                             props.user.notes.forEach((e)=>{
                             if(props.selectedNote===e.id){
-                                neededNote = _.omit(e,["titleOfNote"]);
+                                neededNote = _.omit(e,[]);
                             }
                         });
                             console.log(neededNote);
