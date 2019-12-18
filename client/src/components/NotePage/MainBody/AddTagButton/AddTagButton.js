@@ -8,14 +8,14 @@ function AddTagButton(props) {
 
     const checkValue = (value) => {
         let counter=0;
-        const maxChars=50;
+        const maxChars=20;
         for (let i=0 ; i< value.length; i++){
             if(value[i]!==" "){
                 counter++;
             }
         }
         if(value.length > maxChars){
-            props.addCommonNotification(new Message("Too much chars. Use less than 50 chars"));
+            props.addCommonNotification(new Message("Слишком много символов, используйте меньше чем 20 символов"));
         }
         return counter > 0 && value.length < maxChars;
     };
@@ -34,10 +34,10 @@ function AddTagButton(props) {
                         if(props.note.tags.length<10){
                             setAddTagState({...addTagState,button: !addTagState.button});
                         }else{
-                            props.addCommonNotification(new Message("Already 10 tags. No more."));
+                            props.addCommonNotification(new Message("Уже 10 тегов, больше нельзя"));
                         }
                     }}>
-                        {" Добавить Тэг "}
+                        {" Добавить Тег "}
                     </button>
                     </>
                         :
