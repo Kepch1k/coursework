@@ -5,6 +5,7 @@ const initialState = {
     currentNote:null,
     title:"Безымянный",
     state:"creating",
+    id:null,
 };
 
 export default function (state = initialState, action) {
@@ -40,6 +41,13 @@ export default function (state = initialState, action) {
                 currentNote:null,
                 title:"Безымянный",
                 state:"creating",
+            };
+        }
+
+        case ACTION.RENAME_NOTE: {
+            return {
+                ...state,
+                title:action.title,
             };
         }
 

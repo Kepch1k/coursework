@@ -120,8 +120,21 @@ export const doReAnimation = (data) => {
 };
 
 export const getUserNotes = () => {
+    console.log("getUserNotes");
     return ({
         type: ACTION.GET_USER_NOTES,
     })
 };
 
+export const renameNote = (data) => {
+    console.log("getUserNotes");
+    return ({
+        type: ACTION.RENAME_NOTE,
+        title:data,
+    })
+};
+
+export const logout = () => {
+    console.log("logout2");
+    return ({type: ACTION.LOGOUT});
+};

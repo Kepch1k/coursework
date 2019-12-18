@@ -10,6 +10,8 @@ function MainBody(props) {
         null
     );
 
+   // console.log(props.user.notes);
+
     useEffect(() => {
             if(props.user.user){
                 if(!props.user.notes){
@@ -24,6 +26,7 @@ function MainBody(props) {
 
     if(props.user){
         if(props.user.notes){
+            console.log( props.user.notes);
             notesToRender = props.user.notes.map((e)=>{
                 return <li key={e.id} className={`${style.note} ${(e.id===selectedNote)?style.selected:""}`} onClick={()=>{setSelectedNote(e.id)}}>
                     {e.titleOfNote}

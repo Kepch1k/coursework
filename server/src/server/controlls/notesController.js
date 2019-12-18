@@ -18,17 +18,21 @@ console.log("req.preparedData",req.preparedData);
 };
 
 module.exports.updateNote = async (req, res, next) => {
-    const files = req.files;
-    const payload = req.body;
-    const id = req.params.id;
-    const {fileNames} = _.pick(payload, 'fileNames');
+    const {preparedData} = req;
+    const {id} = req.params;
+    console.log("\n\n\n payload",preparedData,"\n\n\n");
     try {
-        const savedFiles = await pathsToFiles(files);
-        const data = await preparingData(payload, savedFiles, id);
-        const createdContest = await Contest.create(data);
-        res.send({
-            contest: createdContest.dataValues
-        });
+        const result = await Note.update(
+            preparedData,
+            {returning: true, where: {id}}
+        );
+        const [, [newResult]] = result;
+        if (newResult) {
+            res.send("has updated");
+        } else {
+            res.send(" error");
+        }
+       // res.send("OK");
     } catch (e) {
         console.log(e);
         next(e);
@@ -36,27 +40,30 @@ module.exports.updateNote = async (req, res, next) => {
 };
 
 module.exports.deleteNote = async (req, res, next) => {
-    const files = req.files;
-    const payload = req.body;
-    const id = req.params.id;
-    const {fileNames} = _.pick(payload, 'fileNames');
-    try {
-        const savedFiles = await pathsToFiles(files);
-        const data = await preparingData(payload, savedFiles, id);
-        const createdContest = await Contest.create(data);
-        res.send({
-            contest: createdContest.dataValues
+    try{
+        const {id} = req.params;
+        await Note.destroy({
+            returning: true,
+            where: {
+                id
+            }
         });
-    } catch (e) {
-        console.log(e);
+        res.send("has deleted");
+    }catch (e) {
+        console.log("\n\n\n result",e,"\n\n\n");
         next(e);
     }
+
 };
 
 module.exports.getNote = async (req, res, next) => {
     const {idUser} = req;
     try {
-        const foundedNotes = await Note.findAll({where: {userId:idUser}});
+        const foundedNotes = await Note.findAll({
+            where: {userId:idUser},
+            order: [['id', 'ASC']]
+        });
+        console.log("\n\n\n result",foundedNotes,"\n\n\n");
         const notesToSend = foundedNotes.map((e)=>{
            return e.dataValues;
         });

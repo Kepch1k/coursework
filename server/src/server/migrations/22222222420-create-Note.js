@@ -20,9 +20,6 @@ module.exports = {
             tags: {
                 type: Sequelize.ARRAY(Sequelize.TEXT),
                 allowNull: true,
-                validate: {
-                    notEmpty: false,
-                },
             },
             titleOfNote: {
                 type: Sequelize.STRING,

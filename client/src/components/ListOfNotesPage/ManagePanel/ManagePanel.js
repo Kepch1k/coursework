@@ -4,6 +4,7 @@ import connect from 'react-redux/es/connect/connect';
 import {createNote, changeNote, deleteNote, addCommonNotification} from "../../../actions/actionCreator";
 import Message from "../../../utils/Message";
 import history from "../../../boot/browserHistory";
+const _ = require("lodash");
 
 function ManagePanel(props) {
 //console.log(props.selectedNote);
@@ -23,9 +24,10 @@ function ManagePanel(props) {
                         let neededNote;
                             props.user.notes.forEach((e)=>{
                             if(props.selectedNote===e.id){
-                                neededNote = e;
+                                neededNote = _.omit(e,["titleOfNote"]);
                             }
                         });
+                            console.log(neededNote);
                         props.changeNote(neededNote);
                         setTimeout(()=>{ history.push('/note/')},0);
                     }else {

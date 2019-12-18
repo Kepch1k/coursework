@@ -12,6 +12,7 @@ module.exports.prepare = async (req, res, next) => {
         for(let key in neededField){
             preparedData[FIELD_FOR_CREATE_NOTE_TO_REPLACE[key]]=neededField[key];
         }
+        if(preparedData.tags)
         req.preparedData=preparedData;
         next();
     } catch (e) {

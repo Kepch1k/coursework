@@ -1,4 +1,5 @@
 import ACTION from '../actions/actiontsTypes';
+import {FIELD_FOR_CREATE_NOTE_TO_REPLACE} from "../utils/consts";
 
 const initialState = {
     data: {},
@@ -59,6 +60,44 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                notes:action.notes,
+            };
+        }
+        case ACTION.ADD_NODE_TO_LIST: {
+            return {
+                ...state,
+                notes:[...state.notes,action.note],
+            };
+        }
+
+        case ACTION.DELETE_NODE_FROM_LIST: {
+            return {
+                ...state,
+                notes:[...state.notes.filter((e)=>{return e.id!==action.note})],
+            };
+        }
+
+        case ACTION.UPDATE_NODE_IN_LIST: {
+            return {
+                ...state,
+                notes:[...state.notes.map((e)=>{
+                    if (e.id===action.note.id){
+
+                        return {
+                            ...e,
+                            ...action.note
+                        };
+                    }else{
+                        return e;
+                    }
+
+                })],
+            };
+        }
+
+        case ACTION.USER_LOGOUT: {
+            return {
+                ...state,
+                user: null,
             };
         }
 

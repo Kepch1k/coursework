@@ -11,15 +11,15 @@ const asyncValidate = (values /*, dispatch */) => {
                 const resPassword = await yup.reach(schema, 'password').isValid(values["login/password"]);
 
                 if (!values["login/email"]) {
-                    errors["login/email"] = 'Required'
+                    errors["login/email"] = 'Обязательно'
                 } else if (!resEmail) {
-                    errors["login/email"] = 'Email is not valid format';
+                    errors["login/email"] = 'Некорректная почта';
                 }
 
                 if (!values["login/password"]) {
-                    errors["login/password"] = 'Password required';
+                    errors["login/password"] = 'Пароль обязателен';
                 } else if (!resPassword) {
-                    errors["login/password"] = 'Password is not valid. Use password with at least 8 chars,one lowercase and uppercase char and 1 number or special char ';
+                    errors["login/password"] = 'Пароль не подходит, используйте как минимум 8 символов,по 1 в верхнем и нижнем регистрах и хоть 1 цифру или специальный символ';
                 }
 
             }else if(values.tab==="register"){
@@ -29,33 +29,33 @@ const asyncValidate = (values /*, dispatch */) => {
                 const resPassword = await yup.reach(schema, 'password').isValid(values["register/password"]);
 
                 if (!values["register/username"]) {
-                    errors["register/username"] = 'Field cannot be empty';
+                    errors["register/username"] = 'Обязательно';
                 } else if (!resUserName) {
-                    errors["register/username"] = 'Must be 10 characters or more';
+                    errors["register/username"] = 'От 10 и более символов';
                 }
 
                 if (!values["register/email"]) {
-                    errors["register/email"] = 'Required'
+                    errors["register/email"] = 'Обязательно'
                 } else if (!resEmail) {
-                    errors["register/email"] = 'Email is not valid format';
+                    errors["register/email"] = 'Некорректная почта';
                 }
 
                 if (!values["register/displayName"]) {
-                    errors["register/displayName"] = 'Required'
+                    errors["register/displayName"] = 'Обязательно'
                 } else if (!resDisplayName) {
-                    errors["register/displayName"] = 'Must be 8 characters or more';
+                    errors["register/displayName"] = 'От 8 и более символов';
                 }
 
                 if (!values["register/password"]) {
-                    errors["register/password"] = 'Password required';
+                    errors["register/password"] = 'Пароль обязателен';
                 } else if (!resPassword) {
-                    errors["register/password"] = 'Password is not valid. Use password with at least 8 chars,one lowercase and uppercase char and 1 number or special char ';
+                    errors["register/password"] = 'Пароль не подходит, используйте как минимум 8 символов,по 1 в верхнем и нижнем регистрах и хоть 1 цифру или специальный символ';
                 }
 
                 if (!values["register/repeat_password"]) {
-                    errors["register/repeat_password"] = 'Password Confirmation required';
+                    errors["register/repeat_password"] = 'Подтверждение пароля обязательно';
                 } else if (!(values["register/password"] === values["register/repeat_password"]) && resPassword) {
-                    errors["register/repeat_password"] = 'Password confirmation needs to match original password';
+                    errors["register/repeat_password"] = 'Пароли должны совпадать';
                 }
 
             }

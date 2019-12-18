@@ -1,19 +1,99 @@
-.startPage {
-
-}
-
 .mainPiece{
  float: right;
   transition: width 0.3s linear;
 
   .content{
-    //min-height:100vh;
     z-index: 10;
     background-color: #0B3157;
     position: relative;
   }
 
+  .error{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: -100px auto 0 auto;
+    text-align: center;
+    overflow: hidden;
+    border: 2px solid;
+    top: 50vh;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .no-401::before{
+    content:'401';
+  }
+  .no-401::after{
+    content:'Unauthorized';
+  }
+
+  .error::before{
+    position: relative;
+    display: block;
+    font-size: 100px;
+    font-weight: 100;
+    margin: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65%;
+    animation: error-anim 5s;
+  }
+
+  .error::after{
+    position: relative;
+
+    display: block;
+    font-size: 25px;
+    font-weight: 100;
+
+    margin: auto;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 35%;
+
+    animation: message-anim 5s;
+  }
+
+  @keyframes error-anim{
+    from{
+      opacity: 0;
+      transform: translateY(-25px);
+    }
+    to{
+      opacity: 1;
+    }
+  }
+  @keyframes error-anim-flash{
+    0%{
+      opacity: 1;
+    }
+    50%{
+      opacity: 0.25;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+
+
+  @keyframes message-anim{
+    from{
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
 }
+
+
 
 a {
   text-decoration: none;

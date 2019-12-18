@@ -62,3 +62,13 @@ module.exports.refreshUser = async (req, res, next) => {
         next({status: 401, message: 'Your session ended. Please re login.'});
     }
 };
+
+module.exports.logout = async (req, res, next) => {
+    await RefreshToken.destroy({
+        returning: true,
+        where: {
+            tokenString: req.body.data.token
+        }
+    });
+    res.send("OK");
+};

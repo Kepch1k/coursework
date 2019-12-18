@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import style from './Navigation.module.scss';
 import connect from 'react-redux/es/connect/connect';
 import {Link} from 'react-router-dom';
-import {showingOrHidingNavigation,writeHtml,doReAnimation} from "../../actions/actionCreator";
+import {showingOrHidingNavigation,writeHtml,doReAnimation,logout} from "../../actions/actionCreator";
 import siteFooter from '../../functionsForAnimation/navigation/setSiteFooter';
 import deepEqual from '../../functionsForAnimation/navigation/deepEqual';
 import onResizeWindow from '../../functionsForAnimation/navigation/onResizeWindow';
@@ -41,7 +41,7 @@ function Navigation(props) {
             onResize();
 
         //console.log("onResize    ")
-        },0);
+        },400);
     }else{
          setTimeout(()=>{
 
@@ -145,7 +145,7 @@ function Navigation(props) {
     };
 
     const [user, setUser] = useState({
-        nickName:"Anne Hathaway",
+        nickName:"Пользователь",
         lvl:{
             currentLvl:10,
             currentXP:0,
@@ -182,6 +182,10 @@ function Navigation(props) {
             ru:"Статистика",
             numberOfNewSmth:null,
         },
+        {
+            ru:"Выход",
+            numberOfNewSmth:null,
+        },
     ]);
 
     // const [colorOfProgress, setColorOfProgress] = useState("#00b400");
@@ -194,8 +198,13 @@ function Navigation(props) {
 
     const accountMenuToRender = accountMenu.map((el,index,array)=>{
         const lastElement=((index + 1) === array.length)?style.lastElement:"";
-        const link = (el.ru==="Мои записи")?"/":"/gg/";
-       return  <Link to={link} key={index}><div className={`${style.itemOfList} ${lastElement}`} >
+        let link;
+        switch (el.ru) {
+            case "Мои записи":link ="/";break;
+            case "Выход":link ="/";break;
+            default :link ="/gg/";
+        }
+       return  <Link to={link} key={index}><div className={`${style.itemOfList} ${lastElement}`} onClick={(el.ru==="Выход")?()=>{props.logout();console.log("logout");}:()=>{}}>
            <div className={`${style.contain}`}>
                {el.ru}
            </div>
@@ -250,7 +259,7 @@ function Navigation(props) {
         <nav className={`${style.navigation}`} id={"navigation"}>
             {(!!props.user)?<div className={`${style.forLocation}`} style={{width:(props.Nav.show)?"300px":"0px",marginLeft:(props.Nav.show)?"20px":"0px"}} id={"forLocation"}>
                 <div className={`${style.accountProfile}`} >
-                    <div className={`${style.avatar}`} style={{backgroundImage:"url(https://upload.wikimedia.org/wikipedia/commons/e/e1/Anne_Hathaway_Face.jpg)"}}/>
+                    <div className={`${style.avatar}`} style={{backgroundImage:"url(http://gimnazija.com.ua/wp-content/uploads/2017/03/no-avatar-300x300.png)"}}/>
                     <div className={`${style.info}`}>
                         {user.nickName}
                     </div>
@@ -315,6 +324,8 @@ const mapDispatchToProps = (dispatch) => ({
     showingOrHidingNavigation: (data) => dispatch(showingOrHidingNavigation(data)),
     writeHtml: (data) => dispatch(writeHtml(data)),
     doReAnimation: (data) => dispatch(doReAnimation(data)),
+    logout: () => dispatch(logout()),
+
 
 });
 

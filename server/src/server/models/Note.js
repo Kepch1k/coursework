@@ -18,9 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         tags: {
             type: DataTypes.ARRAY(DataTypes.TEXT),
             allowNull: true,
-            validate: {
-                notEmpty: false,
-            },
         },
         titleOfNote: {
             type: DataTypes.STRING,

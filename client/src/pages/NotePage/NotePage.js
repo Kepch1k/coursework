@@ -14,9 +14,9 @@ function NotePage(props) {
             <Navigation/>
             <div id={"mainPiece"} className={`${style.mainPiece}`}>
                 {/*<Header/>*/}
-                <div id={"content"} className={`${style.content}`}>
-                   <MainBody/>
-                </div>
+                {(!!props.user)? <div id={"content"} className={`${style.content}`}>
+                    <MainBody/>
+                </div>: <div className={`${style["error"]} ${style["no-401"]}`}/>}
                 <Footer/>
             </div>
         </div>

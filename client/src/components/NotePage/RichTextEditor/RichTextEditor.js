@@ -21,7 +21,6 @@ function RichTextEditor(props) {
     let RichTextEditorRef = null;
 
    // console.log(convertFromRaw(JSON.parse(props.note.currentNote)));
-    console.log(props.note.currentNote);
     const [editorState, setEditorState] = useState(
         (props.note.currentNote)?EditorState.createWithContent(convertFromRaw(JSON.parse(props.note.currentNote))):EditorState.createEmpty()
     );
@@ -103,7 +102,6 @@ function RichTextEditor(props) {
                         props.setCurrentNote(rawDraftContentState);
                     }}
                     onTab={onTab}
-
                     ref={(input) => { RichTextEditorRef = input; }}
                     spellCheck={true}
                 />
